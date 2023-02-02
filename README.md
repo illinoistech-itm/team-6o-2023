@@ -6,6 +6,3 @@ Private repo for Team Work ITMT430 Spring2023
 - Aleks Kamenovic
 - Grace Sopha
 - Maria Soto
-
-# Placeholder text
-  More placeholder text
