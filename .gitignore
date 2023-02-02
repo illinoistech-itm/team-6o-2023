@@ -1,0 +1,23 @@
+# Files, Folders, security keys, and Binaries to ignore
+
+*~
+*.vdi
+*.box
+.vagrant/
+*console.log
+packer-cache/
+packer_cache/
+*.pem
+*.ova
+output*/
+vagrant.d/
+.vagrant.d/
+*.iso
+variables.pkr.hcl
+*.priv
+.DS_Store
+id_rsa
+id_rsa*
+id_rsa.pub
+id_ed25519*
+.Vagrantfile*
