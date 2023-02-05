@@ -32,3 +32,4 @@ Providing updates when issues arise, or reaching task checkpoints. Once each tas
 
 - Andrew Haines
 - Maria Soto
+- Aleksandar Kamenovic
