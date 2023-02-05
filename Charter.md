@@ -31,3 +31,4 @@ Providing updates when issues arise, or reaching task checkpoints. Once each tas
 # Signatures of Stakeholders in Agreement to this Charter
 
 - Andrew Haines
+- Maria Soto
