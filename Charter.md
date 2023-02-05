@@ -13,7 +13,7 @@ Providing updates when issues arise, or reaching task checkpoints. Once each tas
 
 - Each team member must attend project meetings in order to stay up to date with their tasks and project related work.
 
-- In order to be excused from a meeting, team members must give notice to the group at least 24 hours before the meeting. It is the excused team member's responability to find out what they missed in the meeting. This can be done via communication with current PM (project manager).
+- In order to be excused from a meeting, team members must give notice to the group at least 24 hours before the meeting. It is the excused team member's responsibility to find out what they missed in the meeting. This can be done via communication with current PM (project manager).
 
 - Any inclination of racism, prejudice, bullying, or harassment will not be tolerated. All team members must maintain respectful behavior throughout interactions with other team members.
 
@@ -26,3 +26,8 @@ Providing updates when issues arise, or reaching task checkpoints. Once each tas
 # Restoration methods
 
 - At first, both parties of current issue will have a group meeting with the current project manager. The current project manager will try to resolve the conflict in this meeting. If conflict is not able to be resolved by project manager, the conflict will be lifted to the course instructor. Then the course instructor will determine how the conflict should be handled
+
+
+# Signatures of Stakeholders in Agreement to this Charter
+
+- Andrew Haines
