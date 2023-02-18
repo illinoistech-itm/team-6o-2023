@@ -3,7 +3,7 @@
 - Each team member will communicate with the group as they complete each task.
 Providing updates when issues arise, or reaching task checkpoints. Once each task is complete, team members must get current Project Manager's approval for completion of designated task.
 
-- Each member is assigned a role and it is their responsability to complete each task under designated role.
+- Each member is assigned a role and it is their responsibility to complete each task under designated role.
 
 - Team members are encouraged to help each other with tasks but this is not required.
 
@@ -21,7 +21,7 @@ Providing updates when issues arise, or reaching task checkpoints. Once each tas
 
 - If three meetings are missed without a 24 hour notice, each team member in violation of this rule will be excluded from further project work. They will have to do their own project by themselves.
 
-- If a team member(s) shows any inclination of racism, prejudice, bullying, or harassment, the team member will be kicked from the project and the instructor will be notified. 
+- If a team member(s) shows any inclination of racism, prejudice, bullying, or harassment, the team member will be kicked from the project and the instructor will be notified.
 
 # Restoration methods
 
@@ -33,3 +33,4 @@ Providing updates when issues arise, or reaching task checkpoints. Once each tas
 - Andrew Haines
 - Maria Soto
 - Aleksandar Kamenovic
+- Grace Sopha

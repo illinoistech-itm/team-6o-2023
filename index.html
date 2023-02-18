@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" id="home-page">
+<head>
+	<title>Hawkstagram</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no"/>
+  <link rel="stylesheet" href="assets/screen.css"/>
+</head>
+<body>
+  <header>
+   	<h1>Hawkstagram</h1>
+  </header>
+     <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/upload">
+        <div class="form-group">
+            <div class="col-sm-4">
+							<ol>
+								<li>
+									<input type="file" class="form-control"  name="uploadFile"/>
+								</li>
+                <li>
+									<input type="text" class="form-control"  name="description" placeholder="Enter a description"/>
+								</li>
+                <li>
+                  <input type="text" class="form-control"  name="name" placeholder="First name"/>
+                </li>
+                <!-- email for sns -->
+								<li>
+									<input type="email" class="form-control"  name="email" placeholder="youremail@email.com"/>
+								</li>
+							</ol>
+						</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4">
+                <input class="btn btn-primary" type="submit" value="Upload Post"/>
+            </div>
+        </div>
+    </form>
+    <footer id="footer">
+      <nav>
+        <ul>
+          <li>
+            <a class="navigate" href="/"><img src="./assets/home.png" alt=""></a>
+          </li>
+          <li>
+            <a class="navigate" href="#"><img src="./assets/plus.png" alt=""></a>
+          </li>
+          <li>
+            <a class="navigate" href="#"><img src="./assets/user.png" alt=""></a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+</body>
+</html>
