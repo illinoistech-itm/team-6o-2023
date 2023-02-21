@@ -3,7 +3,7 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 packer {
   required_plugins {
     virtualbox = {
-      version = ">= 1.0.8"
+      version = "= 1.1.0"
       source  = "github.com/hashicorp/proxmox"
     }
   }
@@ -136,7 +136,7 @@ build {
   sources = ["source.proxmox-iso.frontend-webserver","source.proxmox-iso.backend-database"]
 
   ########################################################################################################################
-  # Using the file provisioner to SCP this file to the instance 
+  # Using the file provisioner to SCP this file to the instance
   # Add .hcl configuration file to register an instance with Consul for dynamic DNS on the third interface
   ########################################################################################################################
 
@@ -146,8 +146,8 @@ build {
   }
 
   ########################################################################################################################
-  # Copy the node-exporter-consul-service.json file to the instance move this file to /etc/consul.d/ 
-  # directory so that each node can register as a service dynamically -- which Prometheus can then 
+  # Copy the node-exporter-consul-service.json file to the instance move this file to /etc/consul.d/
+  # directory so that each node can register as a service dynamically -- which Prometheus can then
   # scape and automatically find metrics to collect
   ########################################################################################################################
 
@@ -204,31 +204,31 @@ build {
   # Interface ens20
   # https://www.consul.io/docs/troubleshoot/common-errors
   ########################################################################################################################
-  
+
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     scripts         = ["../scripts/proxmox/core-jammy/post_install_change_consul_bind_interface.sh"]
   }
-  
+
   ############################################################################################
   # Script to give a dynamic message about the consul DNS upon login
   #
   # https://ownyourbits.com/2017/04/05/customize-your-motd-login-message-in-debian-and-ubuntu/
   #############################################################################################
-  
+
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     scripts         = ["../scripts/proxmox/core-jammy/post_install_update_dynamic_motd_message.sh"]
-  }  
-  
+  }
+
   ############################################################################################
   # Script to install Prometheus Telemetry support
   #############################################################################################
-  
+
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     scripts         = ["../scripts/proxmox/core-jammy/post_install_prxmx_ubuntu_install-prometheus-node-exporter.sh"]
-  } 
+  }
 
   ########################################################################################################################
   # Uncomment this block to add your own custom bash install scripts
