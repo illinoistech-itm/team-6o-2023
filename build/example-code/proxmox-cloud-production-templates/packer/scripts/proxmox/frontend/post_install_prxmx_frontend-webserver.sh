@@ -10,7 +10,6 @@ sudo apt-get install -y nginx curl rsync
 # https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
-sudo apt install -y npm
 
 # https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl
 # https://ethitter.com/2016/05/generating-a-csr-with-san-at-the-command-line/
