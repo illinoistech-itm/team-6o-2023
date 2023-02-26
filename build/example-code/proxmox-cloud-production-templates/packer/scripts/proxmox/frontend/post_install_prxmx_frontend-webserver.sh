@@ -10,6 +10,7 @@ sudo apt-get install -y nginx curl rsync
 # https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
+sudo apt install -y npm
 
 # https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl
 # https://ethitter.com/2016/05/generating-a-csr-with-san-at-the-command-line/
@@ -22,3 +23,12 @@ sudo npm install -g npm@9.4.2
 # Install expressjs and pm2
 sudo npm install express pm2
 
+# Install EJS - Embedded JavaScript templates
+# https://ejs.co/
+npm install ejs
+
+# Start the nodejs app where it is located via PM2
+# https://pm2.keymetrics.io/docs/usage/quick-start
+#cd /home/ubuntu/
+
+#sudo pm2 start server.js
