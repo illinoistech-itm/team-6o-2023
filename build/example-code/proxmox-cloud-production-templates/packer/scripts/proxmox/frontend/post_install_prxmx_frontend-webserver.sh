@@ -26,3 +26,9 @@ sudo npm install express pm2
 # Install EJS - Embedded JavaScript templates
 # https://ejs.co/
 npm install ejs
+
+# Start the nodejs app where it is located via PM2
+# https://pm2.keymetrics.io/docs/usage/quick-start
+#cd /home/ubuntu/
+
+#sudo pm2 start server.js
