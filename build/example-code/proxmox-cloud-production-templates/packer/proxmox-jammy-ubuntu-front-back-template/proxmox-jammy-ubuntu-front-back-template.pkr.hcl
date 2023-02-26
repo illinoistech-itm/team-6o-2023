@@ -245,7 +245,7 @@ build {
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     scripts         = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
-                      "../scripts/proxmox/backend/post_install_prxmx_backend_database.sh"]
+                      "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]
   }
 
