@@ -3,8 +3,8 @@
 # This is where you would update or open new firewall ports.
 # By default is open:
 # Port 22 for SSH
-# port 8301 and 8500 are the Gossip protocol and for the instance to be able to 
-# register with the Consul DNS service 
+# port 8301 and 8500 are the Gossip protocol and for the instance to be able to
+# register with the Consul DNS service
 # Instances will be using firewalld
 ##############################################################################################
 sudo apt-get update
@@ -37,6 +37,9 @@ sudo firewall-cmd --zone=meta-network --change-interface=ens20 --permanent
 
 sudo firewall-cmd --zone=meta-network --add-port=8301/tcp --permanent
 sudo firewall-cmd --zone=meta-network --add-port=8301/udp --permanent
+
+sudo firewall-cmd --zone=meta-network --add-port=8501/tcp --permanent
+sudo firewall-cmd --zone=meta-network --add-port=8501/udp --permanent
 
 # Created entry for Node_exporter to be availabe for scraping
 sudo firewall-cmd --zone=meta-network --add-port=9100/tcp --permanent
