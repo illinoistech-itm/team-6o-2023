@@ -38,8 +38,9 @@ sudo firewall-cmd --zone=meta-network --change-interface=ens20 --permanent
 sudo firewall-cmd --zone=meta-network --add-port=8301/tcp --permanent
 sudo firewall-cmd --zone=meta-network --add-port=8301/udp --permanent
 
+sudo firewall-cmd --zone=meta-network --add-port=8500/tcp --permanent
 sudo firewall-cmd --zone=meta-network --add-port=8501/tcp --permanent
-sudo firewall-cmd --zone=meta-network --add-port=8501/udp --permanent
+sudo firewall-cmd --zone=meta-network --add-port=8501/ucp --permanent
 
 # Created entry for Node_exporter to be availabe for scraping
 sudo firewall-cmd --zone=meta-network --add-port=9100/tcp --permanent
