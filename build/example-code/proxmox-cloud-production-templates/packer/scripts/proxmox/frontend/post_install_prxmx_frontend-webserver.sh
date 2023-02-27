@@ -34,6 +34,7 @@ npm install ejs
 # Start the nodejs app where it is located via PM2
 # Command to create a service handler and start that javascript app at boot time
 pm2 startup
+
 # The pm2 startup command generates this command
 sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
 
