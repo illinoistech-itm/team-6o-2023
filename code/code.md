@@ -29,6 +29,8 @@ This document will include all tools, frameworks, and coding applications that w
 
 [Link to EJS](https://ejs.co/#promo)
 
+[EJS Tutorial](https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application) 
+
 ## Webpage Frameworks:
 - Our team will be ultilizing **Express** as our web application framework. Express is a web framework designed specifically for node.js. 
 
