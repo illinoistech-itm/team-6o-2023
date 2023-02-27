@@ -16,6 +16,11 @@ sudo apt-get install -y nodejs
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096  -keyout /etc/ssl/private/selfsigned.key -out /etc/ssl/certs/selfsigned.crt -subj "/C=US/ST=IL/L=Chicago/O=IIT/OU=rice/CN=iit.edu"
 sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
+# The command: su - vagrant -c switches from root to the user vagrant to execute the git clone command
+# Clone the frontend code from team repo
+su - vagrant -c https://github.com/illinoistech-itm/team-6o-2023.git
+cd ./team-6o-2023/code/
+
 # Upgrade to latest NPM
 sudo npm install -g npm@9.4.2
 
@@ -27,7 +32,10 @@ sudo npm install express pm2
 npm install ejs
 
 # Start the nodejs app where it is located via PM2
-# https://pm2.keymetrics.io/docs/usage/quick-start
-#cd /home/ubuntu/
+# Command to create a service handler and start that javascript app at boot time
+pm2 startup
 
-#sudo pm2 start server.js
+# The pm2 startup command generates this command
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
+
+sudo pm2 start server.js

@@ -33,14 +33,14 @@ variable "MEMORY" {
   default = "4192"
 }
 
-# Best to keep this low -- you can expand the size of a disk when deploying 
+# Best to keep this low -- you can expand the size of a disk when deploying
 # instances from templates - but not reduce the disk size -- No need to edit this
 variable "DISKSIZE" {
   type    = string
   default = "25G"
 }
 
-# This is the name of the disk the build template will be stored on in the 
+# This is the name of the disk the build template will be stored on in the
 # Proxmox cloud -- No need to edit this
 variable "STORAGEPOOL" {
   type = string
@@ -59,7 +59,7 @@ variable "frontend-VMNAME" {
 }
 
 # This is the password set in the subiquity/http/user-data line 9,
-# default password is vagrant, and password auth will be remove 
+# default password is vagrant, and password auth will be remove
 # and replaced with Public Key Authentication at run time --
 # This is only for build time
 variable "frontend-SSHPW" {
@@ -75,7 +75,7 @@ variable "backend-VMNAME" {
 }
 
 # This is the password set in the subiquity/http/user-data line 9,
-# default password is vagrant, and password auth will be remove 
+# default password is vagrant, and password auth will be remove
 # and replaced with Public Key Authentication at run time --
 # This is only for build time
 variable "backend-SSHPW" {
