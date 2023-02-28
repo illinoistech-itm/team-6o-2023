@@ -34,6 +34,7 @@ source "virtualbox-iso" "ws" {
   ssh_password            = "${var.user-ssh-password}"
   ssh_timeout             = "45m"
   cpus                    = 2
+  ssh_handshake_attempts = 2000
   rtc_time_base           = "UTC"
   # https://www.virtualbox.org/manual/ch06.html
   nic_type                = "virtio"
@@ -42,7 +43,7 @@ source "virtualbox-iso" "ws" {
   # Add --nat-localhostreachable1 forced by https://github.com/hashicorp/packer/issues/12118
   vboxmanage              = [["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"]]
   virtualbox_version_file = ".vbox_version"
-  vm_name                 = "jammy-server"
+  vm_name                 = "ws"
   headless                = "${var.headless_build}"
 }
 
@@ -68,6 +69,7 @@ source "virtualbox-iso" "db" {
   ssh_password            = "${var.user-ssh-password}"
   ssh_timeout             = "45m"
   cpus                    = 2
+  ssh_handshake_attempts = 2000
   rtc_time_base           = "UTC"
   # https://www.virtualbox.org/manual/ch06.html
   nic_type                = "virtio"
@@ -76,7 +78,7 @@ source "virtualbox-iso" "db" {
   # Add --nat-localhostreachable1 forced by https://github.com/hashicorp/packer/issues/12118
   vboxmanage              = [["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"]]
   virtualbox_version_file = ".vbox_version"
-  vm_name                 = "jammy-server"
+  vm_name                 = "db"
   headless                = "${var.headless_build}"
 }
 
