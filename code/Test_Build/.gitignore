@@ -60,5 +60,5 @@ typings/
 # next.js build output
 .next
 
-# Hide data directory
-data/
+# Hide credentials file
+credentials.json

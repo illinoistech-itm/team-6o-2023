@@ -1,0 +1,1 @@
+Place the credentials.json file inside of this folder.
