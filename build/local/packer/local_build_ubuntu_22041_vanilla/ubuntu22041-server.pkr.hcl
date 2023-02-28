@@ -81,18 +81,18 @@ source "virtualbox-iso" "db" {
 }
 
 build {
-  sources = ["source.virtualbox-iso.ws"]
+  sources = ["source.virtualbox-iso.ws", "source.virtualbox-iso.db"]
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     script          = "../scripts/post_install_ubuntu_2204_vagrant_ws.sh"
+    only            = ["virtualbox-iso.ws"]
   }
-
-   sources = ["source.virtualbox-iso.db"]
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    script          = "../scripts/post_install_ubuntu_2204_vagrant_ws.db"
+    script          = "../scripts/post_install_ubuntu_2204_vagrant_db.sh"
+    only            = ["virtualbox-iso.db"]
   }
 
   post-processor "vagrant" {
