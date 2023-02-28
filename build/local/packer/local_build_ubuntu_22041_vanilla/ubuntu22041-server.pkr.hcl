@@ -34,6 +34,7 @@ source "virtualbox-iso" "ws" {
   ssh_password            = "${var.user-ssh-password}"
   ssh_timeout             = "45m"
   cpus                    = 2
+  ssh_handshake_attempts = 2000
   rtc_time_base           = "UTC"
   # https://www.virtualbox.org/manual/ch06.html
   nic_type                = "virtio"
@@ -68,6 +69,7 @@ source "virtualbox-iso" "db" {
   ssh_password            = "${var.user-ssh-password}"
   ssh_timeout             = "45m"
   cpus                    = 2
+  ssh_handshake_attempts = 2000
   rtc_time_base           = "UTC"
   # https://www.virtualbox.org/manual/ch06.html
   nic_type                = "virtio"
