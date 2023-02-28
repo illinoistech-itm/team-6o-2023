@@ -14,6 +14,7 @@ sudo systemctl enable mariadb.service
 sudo systemctl start mariadb.service
 
 # Run script for database setup
+
 sudo mysql < /home/vagrant/team-6o-2023/code/database/create-database.sql
 sudo mysql < /home/vagrant/team-6o-2023/code/database/create-table.sql
 sudo mysql < /home/vagrant/team-6o-2023/code/database/create-user-with-permissions.sql
