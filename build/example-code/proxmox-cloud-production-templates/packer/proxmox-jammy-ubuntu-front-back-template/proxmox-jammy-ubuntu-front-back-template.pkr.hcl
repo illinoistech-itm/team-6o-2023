@@ -145,6 +145,20 @@ build {
     destination = "/home/vagrant/"
   }
 
+########################################################################################################################
+# SSH for github authentication
+########################################################################################################################
+
+  provisioner "file" {
+    source      = "./id_ed25519_buildserver_github_key"
+    destination = "/home/vagrant/.ssh/"
+  }
+
+  provisioner "file" {
+    source      = "./config"
+    destination = "/home/vagrant/.ssh/"
+  }
+
   ########################################################################################################################
   # Copy the node-exporter-consul-service.json file to the instance move this file to /etc/consul.d/
   # directory so that each node can register as a service dynamically -- which Prometheus can then

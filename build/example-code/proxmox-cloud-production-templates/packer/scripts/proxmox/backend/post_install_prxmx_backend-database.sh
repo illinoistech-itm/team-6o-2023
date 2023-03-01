@@ -7,7 +7,7 @@ sudo apt-get install -y mariadb-server
 
 # The command: su - vagrant -c switches from root to the user vagrant to execute the git clone command
 # Clone the backend code from team repo
-su - vagrant -c https://github.com/illinoistech-itm/team-6o-2023.git
+sudo -u vagrant git clone git@github.com:illinoistech-itm/team-06o-2023.git
 cd ./team-6o-2023/code/
 
 sudo systemctl enable mariadb.service
