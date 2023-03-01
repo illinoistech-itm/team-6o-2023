@@ -2,10 +2,10 @@ USE team6o;
 
 CREATE TABLE IF NOT EXISTS accounts
 (
-    uid int auto_increment,
-    name varchar(100) not null,
-    email varchar(100) not null,
-    password varchar(100) not null,
+    uid int AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    email varchar(100) NOT NULL,
+    password varchar(100) NOT NULL,
     primary key(uid)
 );
 
