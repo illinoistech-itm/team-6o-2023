@@ -263,4 +263,16 @@ build {
     only            = ["proxmox-iso.backend-database"]
   }
 
+  ########################################################################################################################
+  # Run the configurations for each element in the network - Focal Database
+  ########################################################################################################################
+
+  provisioner "shell" {
+    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    environment_vars = ["USERPASS=${var.non-root-user-for-database-password}",
+                        "USERNAME=${var.non-root-user-for-database-username}"]
+    script          = "../scripts/core-focal/post_install_ubuntu_db_proxmox.sh"
+    only            = ["proxmox-iso.backend-database"]
+  }
+
 }
