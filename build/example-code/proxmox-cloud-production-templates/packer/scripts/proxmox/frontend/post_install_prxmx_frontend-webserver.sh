@@ -18,7 +18,7 @@ sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
 # The command: su - vagrant -c switches from root to the user vagrant to execute the git clone command
 # Clone the frontend code from team repo
-su - vagrant -c git clone https://github.com/illinoistech-itm/team-6o-2023.git
+su - vagrant -c "git clone git@github.com:illinoistech-itm/team-06o-2023.git"
 cd ./team-6o-2023/code/Test_Build
 
 # Upgrade to latest NPM
