@@ -19,7 +19,7 @@ sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 # The command: su - vagrant -c switches from root to the user vagrant to execute the git clone command
 # Clone the frontend code from team repo
 su - vagrant -c "git clone git@github.com:illinoistech-itm/team-6o-2023.git"
-cd ./team-6o-2023/code/Test_Build
+cd ./team-6o-2023/code/Pug_Build
 
 # Upgrade to latest NPM
 npm install -g npm@9.4.2
@@ -33,6 +33,6 @@ sudo npm install express pm2
 pm2 startup
 
 # The pm2 startup command generates this command
-sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
+#sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
 
-sudo pm2 start server.js
+sudo pm2 start app.js
