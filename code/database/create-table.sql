@@ -1,3 +1,5 @@
+USE team6o;
+
 CREATE TABLE IF NOT EXISTS accounts 
 (
   uid int(11) AUTO_INCREMENT PRIMARY KEY,
