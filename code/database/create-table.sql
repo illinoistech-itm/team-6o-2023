@@ -1,17 +1,22 @@
 USE team6o;
 
-CREATE TABLE IF NOT EXISTS accounts 
+CREATE TABLE IF NOT EXISTS accounts
 (
-  uid int(11) AUTO_INCREMENT PRIMARY KEY,
-  name varchar(50) NOT NULL,
-  email varchar(100) NOT NULL,
-  password varchar(100) NOT NULL
+    uid int auto_increment,
+    name varchar(100) not null,
+    email varchar(100) not null,
+    password varchar(100) not null,
+    primary key(uid)
 );
 
-CREATE TABLE IF NOT EXISTS images 
+CREATE TABLE IF NOT EXISTS images
 (
-  imageid int(11) AUTO_INCREMENT PRIMARY KEY,
+  imageid int AUTO_INCREMENT,
   imagesrc TEXT NOT NULL,
   caption varchar(180),
-  uid int(11) FOREIGN KEY REFERENCES accounts(uid)
+  uid int,
+  primary key(imageid),
+    constraint fk_type
+    foreign key(uid) 
+        references accounts(uid)
 );
