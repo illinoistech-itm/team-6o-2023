@@ -18,7 +18,7 @@ sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
 # The command: su - vagrant -c switches from root to the user vagrant to execute the git clone command
 # Clone the frontend code from team repo
-su - vagrant -c https://github.com/illinoistech-itm/team-6o-2023.git
+su - vagrant -c git clone https://github.com/illinoistech-itm/team-6o-2023.git
 cd ./team-6o-2023/code/
 
 # Upgrade to latest NPM
@@ -26,10 +26,6 @@ sudo npm install -g npm@9.4.2
 
 # Install expressjs, multer and pm2
 sudo npm install express multer pm2
-
-# Install EJS - Embedded JavaScript templates
-# https://ejs.co/
-npm install ejs
 
 # Start the nodejs app where it is located via PM2
 # Command to create a service handler and start that javascript app at boot time
