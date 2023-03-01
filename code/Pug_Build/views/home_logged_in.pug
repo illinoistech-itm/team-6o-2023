@@ -1,0 +1,41 @@
+extends layout
+
+block customcss 
+  link(rel='stylesheet' href='/stylesheets/sidebar.css')
+
+block content
+    main.d-flex.flex-nowrap
+        .d-flex.flex-column.flex-shrink-0.p-3.text-bg-dark(style='width: 280px;')
+            a.d-flex.align-items-center.mb-3.mb-md-0.me-md-auto.text-white.text-decoration-none(href='/')
+                svg.bi.pe-none.me-2(width='40' height='32')
+                    use(xlink:href='')
+                span.fs-4 Hawkstagram
+            hr
+            ul.nav.nav-pills.flex-column.mb-auto
+                li.nav-item
+                    a.nav-link.active(href='' aria-current='page') Home
+                    svg.bi.pe-none.me-2(width='16' height='16')
+                        use(xlink:href='')
+                li
+                    a.nav-link.text-white(href='#') Profile
+                    svg.bi.pe-none.me-2(width='16' height='16')
+                        use(xlink:href='')
+            hr
+            .dropdown
+                a.d-flex.align-items-center.text-white.text-decoration-none.dropdown-toggle(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+                    img.rounded-circle.me-2(src='https://github.com/pengu07.png' alt='' width='32' height='32')
+                    strong  Test User 
+                ul.dropdown-menu.dropdown-menu-dark.text-small.shadow
+                    li
+                        a.dropdown-item(href='#') New project...
+                    li
+                        a.dropdown-item(href='#') Settings
+                    li
+                        a.dropdown-item(href='#') Profile
+                    li
+                        hr.dropdown-divider
+                    li
+                        a.dropdown-item(href='#') Sign out
+        .home-area.scrollarea.bg-light.p-5.rounded
+            h1 Home page 
+            p  Woah! Your google id is: #{id}.

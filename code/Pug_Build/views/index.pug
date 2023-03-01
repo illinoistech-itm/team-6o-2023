@@ -17,7 +17,21 @@ block content
         p.lead
           | Hawkstagram is your one stop to view photos posted by other Scarlet Hawks! Sign in with google to view posts by other Scarlet Hawks!
         .googleButton
-          #g_id_onload(data-client_id= client_id data-context='signup' data-ux_mode='popup' data-callback='decoder' data-auto_prompt='false')
+          #g_id_onload(data-client_id= client_id data-context='signup' data-ux_mode='popup' data-callback='credReturn' data-auto_prompt='false')
+          script.
+            function credReturn(cred){ 
+              const xhr = new XMLHttpRequest();
+              xhr.open("POST", '/home', true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+              xhr.onreadystatechange = () => {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                  console.log(xhr.responseURL);
+                  window.location.href = xhr.responseURL;
+                }
+              }
+              xhr.send(cred.credential);
+            }
           .g_id_signin(data-type='standard' data-shape='rectangular' data-theme='outline' data-text='signup_with' data-size='large' data-logo_alignment='center')
       footer.mt-auto.text-white-50
         p ITMT-430 Group 6o
