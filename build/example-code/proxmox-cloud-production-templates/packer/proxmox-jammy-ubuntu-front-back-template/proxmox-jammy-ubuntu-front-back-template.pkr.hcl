@@ -149,13 +149,13 @@ build {
 # SSH for github authentication
 ########################################################################################################################
 
-    provisioner "file" {
-    source      = "./config"
+  provisioner "file" {
+    source      = "./id_ed25519_buildserver_github_key"
     destination = "/home/vagrant/.ssh/"
   }
 
   provisioner "file" {
-    source      = "./id_ed25519_buildserver_github_key"
+    source      = "./config"
     destination = "/home/vagrant/.ssh/"
   }
 
