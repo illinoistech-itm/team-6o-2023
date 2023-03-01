@@ -155,7 +155,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "./id_ed25519_buildserver_github_key"
+    source      = "~/.ssh/id_ed25519_buildserver_github_key"
     destination = "/home/vagrant/.ssh/"
   }
 
