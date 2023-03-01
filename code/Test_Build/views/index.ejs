@@ -2,77 +2,78 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/cover.css' >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/sidebar.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' >
   </head>
 
-  <body>
-    <main class="d-flex flex-nowrap">
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href=""/></svg>
-          <span class="fs-4">Hawkstagram</span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="" class="nav-link active" aria-current="page">
-              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href=""/></svg>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href=""/></svg>
-              Profile
-            </a>
-          </li>
-        </ul>
-        <hr>
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/pengu07.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong> Test User </strong>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
+  <body class="d-flex h-100 text-center red-bg">
+  
+    <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <div>
+          <h3 class="float-md-start mb-0">Hawkstagram</h3>
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
+            <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
+          </nav>
         </div>
-      </div>
+      </header>
 
-      <div class="home-area scrollarea bg-light p-5 rounded">
-        <h1>Home page </h1>
-        <p> Woah! A Home page!</p>
+      <main class="px-3">
+        <h1>Welcome to Hawkstagram.</h1>
+        <p class="lead">Hawkstagram is your one stop to view photos posted by other Scarlet Hawks! Sign in with google to view posts by other Scarlet Hawks!</p>
+        <div class="googleButton">
+          <div id="g_id_onload"
+            data-client_id='<%= client_id %>'
+            data-context="signup"
+            data-ux_mode="popup"
+            data-callback="decoder"
+            data-auto_prompt="false">
+          </div>
+          <script> 
+            function decoder(response) {
+              /* JWT decoder gotten from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library user Peheje*/
+              function parseJwt (token) {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
 
-        <div id="g_id_onload"
-          data-client_id='<%= client_id %>'
-          data-context="signup"
-          data-ux_mode="popup"
-          data-callback="decoder"
-          data-auto_prompt="false">
+                return JSON.parse(jsonPayload);
+            }
+              const responsePayload = parseJwt(response.credential);
+
+              console.log("ID: " + responsePayload.sub);
+              console.log('Full Name: ' + responsePayload.name);
+              console.log('Given Name: ' + responsePayload.given_name);
+              console.log('Family Name: ' + responsePayload.family_name);
+              console.log("Image URL: " + responsePayload.picture);
+              console.log("Email: " + responsePayload.email);
+
+              window.location.replace("http://localhost:3000/home")
+            }
+        </script>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="signup_with"
+            data-size="large"
+            data-logo_alignment="center">
+          </div>
         </div>
-        
-        <div class="g_id_signin"
-          data-type="standard"
-          data-shape="rectangular"
-          data-theme="filled_black"
-          data-text="signup_with"
-          data-size="large"
-          data-logo_alignment="left"
-          data-width="300">
-        </div>
-      </div>
-    </main>
+      </main>
+
+    <footer class="mt-auto text-white-50">
+      <p>ITMT-430 Group 6o</p>
+    </footer>
+  </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="../public/javascripts/Decoder.js"></script>
   </body>
 </html>
