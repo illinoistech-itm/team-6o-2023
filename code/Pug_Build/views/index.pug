@@ -1,0 +1,25 @@
+extends layout
+
+block customcss 
+  link(rel='stylesheet' href='/stylesheets/cover.css')
+
+block content
+  .d-flex.h-100.text-center.text-bg-dark
+    .cover-container.d-flex.w-100.p-3.mx-auto.flex-column
+      header.mb-auto
+        div
+          h3.float-md-start.mb-0 Hawkstagram
+          nav.nav.nav-masthead.justify-content-center.float-md-end
+            a.nav-link.fw-bold.py-1.px-0.active(aria-current='page' href='#') Home
+            a.nav-link.fw-bold.py-1.px-0(href='#') Contact
+      main.px-3
+        h1 Welcome to Hawkstagram.
+        p.lead
+          | Hawkstagram is your one stop to view photos posted by other Scarlet Hawks! Sign in with google to view posts by other Scarlet Hawks!
+        .googleButton
+          #g_id_onload(data-client_id= client_id data-context='signup' data-ux_mode='popup' data-callback='decoder' data-auto_prompt='false')
+          .g_id_signin(data-type='standard' data-shape='rectangular' data-theme='outline' data-text='signup_with' data-size='large' data-logo_alignment='center')
+      footer.mt-auto.text-white-50
+        p ITMT-430 Group 6o
+block customScripts
+  script(src='https://accounts.google.com/gsi/client' async='' defer='')
