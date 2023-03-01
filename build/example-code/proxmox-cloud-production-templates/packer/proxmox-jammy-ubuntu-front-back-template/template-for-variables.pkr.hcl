@@ -28,6 +28,18 @@ variable "URL" {
   sensitive = true
 }
 
+variable "non-root-user-for-database-password" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "non-root-user-for-database-username" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
 variable "MEMORY" {
   type    = string
   default = "4192"
