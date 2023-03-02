@@ -95,3 +95,10 @@ variable "backend-SSHPW" {
   default = ""
   sensitive = true
 }
+
+# This is the contents for credentials.json
+variable "credentials-json" {
+  type = string
+  sensitive = true
+  default = ""
+}

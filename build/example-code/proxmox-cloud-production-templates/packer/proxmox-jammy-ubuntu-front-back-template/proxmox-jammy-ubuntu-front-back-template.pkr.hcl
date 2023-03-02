@@ -251,28 +251,25 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    environment_vars = ["CREDENTIALS=${var.credentials-json}"]
     scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_frontend-firewall-open-ports.sh",
                       "../scripts/proxmox/frontend/post_install_prxmx_frontend-webserver.sh"]
     only            = ["proxmox-iso.frontend-webserver"]
   }
 
-  provisioner "shell" {
-    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    scripts         = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
-                      "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
-    only            = ["proxmox-iso.backend-database"]
-  }
-
-  ########################################################################################################################
-  # Run the configurations for each element in the network - Focal Database
-  ########################################################################################################################
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     environment_vars = ["USERPASS=${var.non-root-user-for-database-password}",
                         "USERNAME=${var.non-root-user-for-database-username}"]
-    script          = "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"
+    script          = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
+                      "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]
   }
+ ########################################################################################################################
+  # Run the configurations for each element in the network - Focal Database
+  ########################################################################################################################
+
 
 }
+
