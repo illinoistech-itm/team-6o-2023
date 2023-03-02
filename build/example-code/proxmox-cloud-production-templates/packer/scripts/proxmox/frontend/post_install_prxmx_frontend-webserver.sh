@@ -1,6 +1,6 @@
 #!/bin/bash
-set -e
-set -v
+#set -e
+#set -v
 # Install and prepare frontend web server
 
 sudo apt-get update
