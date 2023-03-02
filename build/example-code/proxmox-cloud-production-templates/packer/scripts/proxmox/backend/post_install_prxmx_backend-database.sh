@@ -21,4 +21,4 @@ sed -i "s/\$USERNAME/$USERNAME/g" ./database/*.sql
 
 sudo mysql < /home/vagrant/team-6o-2023/code/database/create-database.sql
 sudo mysql < /home/vagrant/team-6o-2023/code/database/create-table.sql
-#sudo mysql < /home/vagrant/team-6o-2023/code/database/create-user-with-permissions.sql
+sudo mysql < /home/vagrant/team-6o-2023/code/database/create-user-with-permissions.sql
