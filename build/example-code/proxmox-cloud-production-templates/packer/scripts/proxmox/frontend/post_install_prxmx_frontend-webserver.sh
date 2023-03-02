@@ -46,5 +46,6 @@ sed -i "s,\$ORIGIN2,$ORIGIN2,g" ./data/*.txt
 mv data/credentials.txt data/credentials.json
 
 # execute nohup command to run the server in the background, web server runs on port 3000
-nohup npm run start &
-
+#nohup npm run start &
+sudo npm i 
+sudo pm2 start “npm run dev” —name team6o
