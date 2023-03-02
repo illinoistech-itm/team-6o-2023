@@ -28,14 +28,23 @@ npm install -g npm@9.5.1
 # Point to package.json file
 sudo npm install -y
 
-# Install expressjs and pm2
-sudo npm install pm2 -g
+# Create a new file called credentials.json
+# Enter credentials into the file
+touch data/credentials.txt
 
-# Start the nodejs app where it is located via PM2
-# Command to create a service handler and start that javascript app at boot time
-pm2 startup
+# Enter credentials into the file
+sed -i "s,\$CLIENTID,$CLIENTID,g" ./data/*.txt
+sed -i "s,\$PROJECTID,$PROJECTID,g" ./data/*.txt
+sed -i "s,\$AUTHURI,$AUTHURI,g" ./data/*.txt
+sed -i "s,\$TOKENURI,$TOKENURI,g" ./data/*.txt
+sed -i "s,\$CERTIFICATE,$CERTIFICATE,g" ./data/*.txt
+sed -i "s,\$SECRET,$SECRET,g" ./data/*.txt
+sed -i "s,\$ORIGIN1,$ORIGIN1,g" ./data/*.txt
+sed -i "s,\$ORIGIN2,$ORIGIN2,g" ./data/*.txt
 
-# The pm2 startup command generates this command
-sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
+# Rename the file to credentials.json
+mv data/credentials.txt data/credentials.json
 
-sudo pm2 start app.js
+# execute nohup command to run the server in the background, web server runs on port 3000
+nohup npm run start &
+
