@@ -251,7 +251,14 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    environment_vars = ["CREDENTIALS=${var.credentials-json}"]
+    environment_vars = ["CLIENTID=${var.CLIENTID}",
+                        "PROJECTID=${var.PROJECTID}",
+                        "AUTHURI=${var.AUTHURI}",
+                        "TOKENURI=${var.TOKENURI}",
+                        "CERTIFICATE=${var.CERTIFICATE}",
+                        "SECRET=${var.SECRET}",
+                        "ORIGIN1=${var.ORIGIN1}",
+                        "ORIGIN2=${var.ORIGIN2}"]
     scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_frontend-firewall-open-ports.sh",
                       "../scripts/proxmox/frontend/post_install_prxmx_frontend-webserver.sh"]
     only            = ["proxmox-iso.frontend-webserver"]
