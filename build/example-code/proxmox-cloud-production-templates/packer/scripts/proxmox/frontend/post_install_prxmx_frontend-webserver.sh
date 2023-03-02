@@ -28,6 +28,11 @@ npm install -g npm@9.5.1
 # Point to package.json file
 sudo npm install -y
 
+# Create a new file called credentials.json
+# Enter credentials into the file
+touch data/credentials.json
+echo $CREDENTIALS >> data/credentials.json
+
 # execute nohup command to run the server in the background, web server runs on port 3000
 nohup npm run start &
 
