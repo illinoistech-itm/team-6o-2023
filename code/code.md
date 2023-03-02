@@ -35,6 +35,7 @@ This document will include all tools, frameworks, and coding applications that w
 
 - Moving forward, use the folder, Pug-Build to intiate the application. The Test-Build folder contains our old EJS work. We will be using the Test-Build for reference moving forward. In order to run the application, perform the following steps:
 
+**IMPORTANT NOTE: You have to install Node.js and NPM in order to run the application.** [Follow this link to learn how to install Node.js and NPM (Node Package Manager)](https://pugjs.org/api/getting-started.html) 
 1. Download **credentials.json** file from the Discord group chat. Specifically, it is located within the **#secrets** channel. That is where all project files will be shared. 
 2. After downloading **credentials.json**, place it in the **Pug_Build folder**. Specifically, you want to place it in the **data** folder located within the **Pug_Build**.
     
@@ -42,7 +43,7 @@ This document will include all tools, frameworks, and coding applications that w
     
 3. **Pull** current code from source of truth (team-6o repository).
 4. Open up a new terminal window within VS Code.
-5. **cd** into **code** folder , then **cd** into the **Pug-Build** folder.
+5. **cd** into **code** folder , then **cd** into the **Pug_Build** folder.
 6. In the terminal, Type in command, **npm i** to install all dependencies. 
 7. In the terminal, Type in command, **npm run dev** to run apppication.
 8. In a browser, go to **http://localhost:3000**.
