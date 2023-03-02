@@ -39,10 +39,11 @@ This document will include all tools, frameworks, and coding applications that w
     So, the file architecture that you will follow: **code -> Pug_Build -> data ->** *place credentials.json here*
     
 3. **Pull** current code from source of truth (team-6o repository).
-4. **cd** into the Pug-Build folder.
-5. Open up a new terminal window within VS Code.
+4. Open up a new terminal window within VS Code.
+5. **cd** into **code** folder , then **cd** into the **Pug-Build** folder.
 6. In the terminal, Type in command, **npm i** to install all dependencies. 
 7. In the terminal, Type in command, **npm run dev** to run apppication.
+8. In a browser, go to **http:localhost:3000**.
 
 ## Webpage Frameworks:
 - Our team will be ultilizing **Express** as our web application framework. Express is a web framework designed specifically for node.js. 
