@@ -41,7 +41,7 @@ Once you've done so, run `packer init .` if it's the first time to grab any depe
 
 ![Dupe](media/rm-temp.png "Remove temp file")
 
-If yes, proceed with `packer build .` and allow for 20-40 minutes of build time. Once successful, you will see this in the Proxmox console at https://system41.rice.iit.edu:8006 (login using given username and password). To delete old VMs, click the desired one within the console and go to more in the top right corner. Choose remove and check both boxes.
+If yes, proceed with `packer build .` and allow for 20-40 minutes of build time. Once successful, you will see this in the Proxmox console at https://system41.rice.iit.edu:8006 (login using given username and password). To delete old VMs, click the desired one within the console and go to more in the top right corner. Choose remove and check both boxes. Whenever the Packer data is updated it MUST be deleted via console before rebuilding the new with code.
 
 ![Proxmox](media/proxmox.png "Proxmox console")
 
@@ -57,5 +57,26 @@ If it is the first time building, use `terraform init`. Then `terraform validate
 
 ![Terraform](media/prox-addresses.png "Terraform addresses")
 
-To destroy or delete the deployment, use `terraform destroy` and allow around 5 minutes after the destroy before using `terraform apply` again. 
+To destroy or delete the deployment, use `terraform destroy` and allow around 5 minutes after the destroy before using `terraform apply` again. Note that there should be a 1:1 match from Packer to Terraform since Terraform is cloning the Packer VMs (in case you change any specs/variables) - refer to the tutorial at the beginning. 
 
+### Scripts
+
+Core-jammy and jammy-services scripts located in build/example-code/proxmox-cloud-production-templates/packer/scripts/proxmox/ are used to build the operating system, which is Ubuntu Server 22.04. 
+
+Frontend scripts located in build/example-code/proxmox-cloud-production-templates/packer/scripts/proxmox/frontend are used to:
+- Open firewalld ports 80, 443, and 3000 for Nginx and public server
+- Install Nginx, Nodejs, npm
+- Clone team repo
+- Insert credential secrets (Google API)
+- Start web server
+
+![Frontend VM](media/backend.png "Frontend")
+
+Backend scripts located in build/example-code/proxmox-cloud-production-templates/packer/scripts/proxmox/backend are used to:
+- Open firewalld port 3306 for MariaDB
+- Install MariaDB
+- Clone team repo
+- Insert username and password for database
+- Create and autoinject database
+
+![Backend VM](media/frontend.png "Backend")
