@@ -43,7 +43,8 @@ This document will include all tools, frameworks, and coding applications that w
 5. **cd** into **code** folder , then **cd** into the **Pug-Build** folder.
 6. In the terminal, Type in command, **npm i** to install all dependencies. 
 7. In the terminal, Type in command, **npm run dev** to run apppication.
-8. In a browser, go to **http:localhost:3000**.
+8. In a browser, go to **http://localhost:3000**.
+9. In the terminal, press **ctrl + C**. Then type y for yes or n for no. This command stops the application. 
 
 ## Webpage Frameworks:
 - Our team will be ultilizing **Express** as our web application framework. Express is a web framework designed specifically for node.js. 
