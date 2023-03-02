@@ -13,6 +13,8 @@ This document will include all tools, frameworks, and coding applications that w
 
 [Link to NPM](https://www.npmjs.com/package/npm)
 
+[Tutorial for installing Node.js and NPM](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac#windows)
+
 ## Web/App Server: 
 
 - Our team will be ultilizing **Nginx** for our web server.
