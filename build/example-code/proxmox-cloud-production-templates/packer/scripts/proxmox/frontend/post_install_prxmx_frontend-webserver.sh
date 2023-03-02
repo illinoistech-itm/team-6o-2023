@@ -1,6 +1,6 @@
 #!/bin/bash
-#set -e
-#set -v
+set -e
+set -v
 # Install and prepare frontend web server
 
 sudo apt-get update
@@ -48,3 +48,5 @@ mv data/credentials.txt data/credentials.json
 # execute nohup command to run the server in the background, web server runs on port 3000
 nohup npm run start &
 
+# stop script
+exit 0
