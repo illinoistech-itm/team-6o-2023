@@ -261,8 +261,8 @@ build {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
     environment_vars = ["USERNAME=${var.non-root-user-for-database-username}",
                        "USERPASS=${var.non-root-user-for-database-password}"]
-    scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_backend-firewall-open-ports.sh",
-                      "../scripts/proxmox/frontend/post_install_prxmx_backend-database.sh"]
+    scripts         = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
+                      "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]
   }
  ########################################################################################################################
