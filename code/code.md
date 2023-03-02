@@ -33,11 +33,16 @@ This document will include all tools, frameworks, and coding applications that w
 
 - Moving forward, use the folder, Pug-Build to intiate the application. The Test-Build folder contains our old EJS work. We will be using the Test-Build for reference moving forward. In order to run the application, perform the following steps:
 
-1. **Pull** current code from source of truth (team-6o repository).
-2. **cd** into the Pug-Build folder.
-3. Open up a new terminal window within VS Code.
-4. In the terminal, Type in command, **npm i** to install all dependencies. 
-5. In the terminal, Type in command, **npm run dev** to run apppication.
+1. Download **credentials.json** file from the Discord group chat. Specifically, it is located within the **#secrets** channel. That is where all project files will be shared. 
+2. After downloading **credentials.json**, place it in the **Pug_Build folder**. Specifically, you want to place it in the **data** folder located within the **Pug_Build**.
+    
+    So, the file architecture that you will follow: **code -> Pug_Build -> data ->** *place credentials.json here*
+    
+3. **Pull** current code from source of truth (team-6o repository).
+4. **cd** into the Pug-Build folder.
+5. Open up a new terminal window within VS Code.
+6. In the terminal, Type in command, **npm i** to install all dependencies. 
+7. In the terminal, Type in command, **npm run dev** to run apppication.
 
 ## Webpage Frameworks:
 - Our team will be ultilizing **Express** as our web application framework. Express is a web framework designed specifically for node.js. 
