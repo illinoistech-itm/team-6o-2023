@@ -30,8 +30,20 @@ sudo npm install -y
 
 # Create a new file called credentials.json
 # Enter credentials into the file
-touch data/credentials.json
-echo $CREDENTIALS >> data/credentials.json
+touch data/credentials.txt
+
+# Enter credentials into the file
+sed -i "s,\$CLIENTID,$CLIENTID,g" ./data/*.txt
+sed -i "s,\$PROJECTID,$PROJECTID,g" ./data/*.txt
+sed -i "s,\$AUTHURI,$AUTHURI,g" ./data/*.txt
+sed -i "s,\$TOKENURI,$TOKENURI,g" ./data/*.txt
+sed -i "s,\$CERTIFICATE,$CERTIFICATE,g" ./data/*.txt
+sed -i "s,\$SECRET,$SECRET,g" ./data/*.txt
+sed -i "s,\$ORIGIN1,$ORIGIN1,g" ./data/*.txt
+sed -i "s,\$ORIGIN2,$ORIGIN2,g" ./data/*.txt
+
+# Rename the file to credentials.json
+mv data/credentials.txt data/credentials.json
 
 # execute nohup command to run the server in the background, web server runs on port 3000
 nohup npm run start &

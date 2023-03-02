@@ -96,8 +96,50 @@ variable "backend-SSHPW" {
   sensitive = true
 }
 
-# This is the contents for credentials.json
-variable "credentials-json" {
+# This is the contents for credentials.txt which will be changed credentials.json
+variable "CLIENTID" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "PROJECTID" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "AUTHURI" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "TOKENURI" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "CERTIFICATE" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "SECRET" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "ORIGIN1" {
+  type = string
+  sensitive = true
+  default = ""
+}
+
+variable "ORIGIN2" {
   type = string
   sensitive = true
   default = ""
