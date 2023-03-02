@@ -27,7 +27,7 @@ npm install -g npm@9.5.1
 
 # Point to package.json file
 sudo npm install -y
-sudo npm install pm2
+sudo npm install pm2 -g
 
 # Create a new file called credentials.json
 # Enter credentials into the file
