@@ -21,15 +21,23 @@ This document will include all tools, frameworks, and coding applications that w
 
 ## Programming Language:
 
-- Our team has decided to use a mix of **JavaScript** and **EJS(Embedded JavaScript)** to create our web application.
+- Our team has decided to use a mix of **JavaScript** and **PugJS** to create our web application.
+
+- We moved to PugJs because EJS was great but overly complicated. Some of our team has had experience with Pug, that is why we are using it. It is very similar to EJS, but easier to read and implement.
 
 [Link to JavaScript](https://www.javascript.com)
 
-- EJS Is a template engine that gives us the ability to generate **HTML** with plain JavaScript.
+- PugJS Is a template engine that gives us the ability to generate **HTML** with plain JavaScript. Similar to EJS.
 
-[Link to EJS](https://ejs.co/#promo)
+[Link to PugJS](https://pugjs.org/api/getting-started.html)
 
-[EJS Tutorial](https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application) 
+- Moving forward, use the folder, Pug-Build to intiate the application. The Test-Build folder contains our old EJS work. We will be using the Test-Build for reference moving forward. In order to run the application, perform the following steps:
+
+1. **Pull** current code from source of truth (team-6o repository).
+2. **cd** into the Pug-Build folder.
+3. Open up a new terminal window within VS Code.
+4. In the terminal, Type in command, **npm i** to install all dependencies. 
+5. In the terminal, Type in command, **npm run dev** to run apppication.
 
 ## Webpage Frameworks:
 - Our team will be ultilizing **Express** as our web application framework. Express is a web framework designed specifically for node.js. 
