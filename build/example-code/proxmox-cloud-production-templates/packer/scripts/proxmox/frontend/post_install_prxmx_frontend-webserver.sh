@@ -27,6 +27,7 @@ npm install -g npm@9.5.1
 
 # Point to package.json file
 sudo npm install -y
+sudo npm install pm2 -g
 
 # Create a new file called credentials.json
 # Enter credentials into the file
@@ -45,6 +46,11 @@ sed -i "s,\$ORIGIN2,$ORIGIN2,g" ./data/*.txt
 # Rename the file to credentials.json
 mv data/credentials.txt data/credentials.json
 
-# execute nohup command to run the server in the background, web server runs on port 3000
-nohup npm run start &
+# Use pm2 to run the server on port 3000
+pm2 startup
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
+pm2 start "npm run start" --name team6o
 
+# Save the state of process list
+pm2 save
+sudo chown vagrant:vagrant /home/vagrant/.pm2/rpc.sock /home/vagrant/.pm2/pub.sock
