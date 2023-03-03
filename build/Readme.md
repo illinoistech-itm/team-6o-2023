@@ -33,7 +33,7 @@ Then, go to the subiquity/http directory and locate template-user-data as it wil
 
 ![User data](media/user-data-56.png "User data key")
 
-Next, you will need to copy your config and public key (first key we generated) over to the proxmox-jammy-ubuntu-front-back-template directory so Packer can locate it for the app cloning during the build. to copy, go to your ~/.ssh directory, then use the command `cp config id_ed25519_buildserver_github_key ~/team-6o-2023/build/example-code/packer/proxmox-jammy-ubuntu-front-back-template` Then move to that desired directory and use `vim config` as we need to edit it to add StrictHostKeyChecking and the path of the Identityfile.
+Next, you will need to copy your config and build server key (first key we generated) over to the proxmox-jammy-ubuntu-front-back-template directory so Packer can locate it for the app cloning during the build. To copy, go to your ~/.ssh directory, then use the command `cp config id_ed25519_buildserver_github_key ~/team-6o-2023/build/example-code/packer/proxmox-jammy-ubuntu-front-back-template`. Then move to that desired directory and use `vim config` as we need to edit it to add StrictHostKeyChecking and the path of the Identityfile.
 
 ![Packer config](media/packer-config.png "Packer config")
 
@@ -61,7 +61,7 @@ If it is the first time building, use `terraform init`. Then `terraform validate
 
 ![Terraform](media/prox-addresses.png "Terraform addresses")
 
-To destroy or delete the deployment, use `terraform destroy` and allow around 5 minutes after the destroy before using `terraform apply` again. Note that there should be a 1:1 match from Packer to Terraform since Terraform is cloning the Packer VMs (in case you change any specs/variables) - refer to the tutorial at the beginning. 
+To destroy or delete the deployment, use `terraform destroy` and allow around 5 minutes after the destroy before using `terraform apply` again. Note that there should be a 1:1 match from Packer to Terraform since Terraform is cloning the Packer VMs (in case you change any specs/variables) - refer to the tutorials at the beginning. 
 
 ### Scripts
 
