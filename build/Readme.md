@@ -37,6 +37,10 @@ Next, you will need to copy your config and public key (first key we generated) 
 
 ![Packer config](media/packer-config.png "Packer config")
 
+Your directory should look like this:
+
+![Packer directory](media/packer-dir.png "Packer directory")
+
 Once you've done so, run `packer init .` if it's the first time to grab any dependencies. Then, `packer validate .`to ensure configuration is valid. Sometimes when pulling updates, files will duplicate since we changed the names and added it to our gitignore. Simply remove the template files, or the configuration will not validate.
 
 ![Dupe](media/rm-temp.png "Remove temp file")
@@ -70,7 +74,7 @@ Frontend scripts located in build/example-code/proxmox-cloud-production-template
 - Insert credential secrets (Google API)
 - Start web server
 
-![Frontend VM](media/backend.png "Frontend")
+![Frontend VM](media/frontend.png "Frontend")
 
 Backend scripts located in build/example-code/proxmox-cloud-production-templates/packer/scripts/proxmox/backend are used to:
 - Open firewalld port 3306 for MariaDB
@@ -79,4 +83,4 @@ Backend scripts located in build/example-code/proxmox-cloud-production-templates
 - Insert username and password for database
 - Create and autoinject database
 
-![Backend VM](media/frontend.png "Backend")
+![Backend VM](media/backend.png "Backend")
