@@ -23,31 +23,39 @@ variable "pm_log_file" {}
 
 variable "frontend-numberofvms" {}
 variable "backend-numberofvms" {}
+variable "lb-numberofvms" {}
 
 variable "frontend-desc" {}
 variable "backend-desc" {}
+variable "lb-desc" {}
 
 variable "target_node" {}
 
 variable "frontend-template_to_clone" {}
 variable "backend-template_to_clone" {}
+variable "lb-template_to_clone" {}
 
 variable "frontend-memory" {}
 variable "backend-memory" {}
+variable "lb-memory" {}
 
 variable "frontend-cores" {}
 variable "backend-cores" {}
+variable "lb-cores" {}
 
 variable "frontend-sockets" {}
 variable "backend-sockets" {}
+variable "lb-sockets" {}
 
 variable "frontend-disk_size" {}
 variable "backend-disk_size" {}
+variable "lb-disk_size" {}
 
 variable "keypath" {}
 
 variable "frontend-yourinitials" {}
 variable "backend-yourinitials" {}
+variable "lb-yourinitials" {}
 
 variable "consul-service-tag-contact-email" {}
 
