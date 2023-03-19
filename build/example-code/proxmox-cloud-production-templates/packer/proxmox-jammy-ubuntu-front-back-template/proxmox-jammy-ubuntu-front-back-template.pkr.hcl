@@ -20,18 +20,18 @@ packer {
 ###########################################################################################
 source "proxmox-iso" "backend-database" {
   boot_command = [
-        "e<wait>",
-        "<down><down><down>",
-        "<end><bs><bs><bs><bs><wait>",
-        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
-        "<f10><wait>"
-      ]
-  boot_wait    = "5s"
-  cores        = "${var.NUMBEROFCORES}"
-  node         = "${var.NODENAME}"
-  username     = "${var.TOKEN_ID}"
-  token        = "${var.TOKEN_SECRET}"
-  cpu_type     = "host"
+    "e<wait>",
+    "<down><down><down>",
+    "<end><bs><bs><bs><bs><wait>",
+    "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+    "<f10><wait>"
+  ]
+  boot_wait = "5s"
+  cores     = "${var.NUMBEROFCORES}"
+  node      = "${var.NODENAME}"
+  username  = "${var.TOKEN_ID}"
+  token     = "${var.TOKEN_SECRET}"
+  cpu_type  = "host"
   disks {
     disk_size         = "${var.DISKSIZE}"
     storage_pool      = "${var.STORAGEPOOL}"
@@ -41,8 +41,8 @@ source "proxmox-iso" "backend-database" {
   http_directory   = "subiquity/http"
   http_port_max    = 9200
   http_port_min    = 9001
-  iso_checksum     = "sha256:10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb"
-  iso_urls         = ["https://mirrors.edge.kernel.org/ubuntu-releases/22.04.1/ubuntu-22.04.1-live-server-amd64.iso"]
+  iso_checksum     = "${var.ISO-CHECKSUM}"
+  iso_urls         = ["${var.ISO-URL}"]
   iso_storage_pool = "local"
   memory           = "${var.MEMORY}"
 
@@ -66,8 +66,8 @@ source "proxmox-iso" "backend-database" {
   qemu_agent               = true
   cloud_init               = true
   cloud_init_storage_pool  = "local"
-  ssh_password             = "vagrant"
-  ssh_username             = "${var.backend-SSHPW}"
+  ssh_username             = "vagrant"
+  ssh_password             = "${var.SSHPW}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for backend database"
   vm_name                  = "${var.backend-VMNAME}"
@@ -78,18 +78,18 @@ source "proxmox-iso" "backend-database" {
 ###########################################################################################
 source "proxmox-iso" "frontend-webserver" {
   boot_command = [
-        "e<wait>",
-        "<down><down><down>",
-        "<end><bs><bs><bs><bs><wait>",
-        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
-        "<f10><wait>"
-      ]
-  boot_wait    = "5s"
-  cores        = "${var.NUMBEROFCORES}"
-  node         = "${var.NODENAME}"
-  username     = "${var.TOKEN_ID}"
-  token        = "${var.TOKEN_SECRET}"
-  cpu_type     = "host"
+    "e<wait>",
+    "<down><down><down>",
+    "<end><bs><bs><bs><bs><wait>",
+    "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+    "<f10><wait>"
+  ]
+  boot_wait = "5s"
+  cores     = "${var.NUMBEROFCORES}"
+  node      = "${var.NODENAME}"
+  username  = "${var.TOKEN_ID}"
+  token     = "${var.TOKEN_SECRET}"
+  cpu_type  = "host"
   disks {
     disk_size         = "${var.DISKSIZE}"
     storage_pool      = "${var.STORAGEPOOL}"
@@ -99,8 +99,8 @@ source "proxmox-iso" "frontend-webserver" {
   http_directory   = "subiquity/http"
   http_port_max    = 9200
   http_port_min    = 9001
-  iso_checksum     = "sha256:10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb"
-  iso_urls         = ["https://mirrors.edge.kernel.org/ubuntu-releases/22.04.1/ubuntu-22.04.1-live-server-amd64.iso"]
+  iso_checksum     = "${var.ISO-CHECKSUM}"
+  iso_urls         = ["${var.ISO-URL}"]
   iso_storage_pool = "local"
   memory           = "${var.MEMORY}"
 
@@ -124,8 +124,8 @@ source "proxmox-iso" "frontend-webserver" {
   qemu_agent               = true
   cloud_init               = true
   cloud_init_storage_pool  = "local"
-  ssh_password             = "vagrant"
-  ssh_username             = "${var.frontend-SSHPW}"
+  ssh_username             = "vagrant"
+  ssh_password             = "${var.SSHPW}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for a frontend webserver"
   vm_name                  = "${var.frontend-VMNAME}"
