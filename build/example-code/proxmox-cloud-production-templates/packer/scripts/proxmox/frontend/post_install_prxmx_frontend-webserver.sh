@@ -6,6 +6,8 @@ set -v
 sudo apt-get update
 sudo apt-get install -y curl rsync
 
+# https://github.com/nodesource/distributions/blob/master/README.md#using-ubuntu-2
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # The command: su - vagrant -c switches from root to the user vagrant to execute the git clone command
