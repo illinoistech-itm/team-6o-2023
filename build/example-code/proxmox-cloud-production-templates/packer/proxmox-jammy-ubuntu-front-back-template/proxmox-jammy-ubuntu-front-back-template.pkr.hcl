@@ -131,10 +131,67 @@ source "proxmox-iso" "frontend-webserver" {
   vm_name                  = "${var.frontend-VMNAME}"
 }
 
+###########################################################################################
+# This is a Packer build template for the load-balancer
+###########################################################################################
+source "proxmox-iso" "load-balancer" {
+  boot_command = [
+    "e<wait>",
+    "<down><down><down>",
+    "<end><bs><bs><bs><bs><wait>",
+    "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+    "<f10><wait>"
+  ]
+  boot_wait = "5s"
+  cores     = "${var.NUMBEROFCORES}"
+  node      = "${var.NODENAME}"
+  username  = "${var.TOKEN_ID}"
+  token     = "${var.TOKEN_SECRET}"
+  cpu_type  = "host"
+  disks {
+    disk_size         = "${var.DISKSIZE}"
+    storage_pool      = "${var.STORAGEPOOL}"
+    storage_pool_type = "lvm"
+    type              = "virtio"
+  }
+  http_directory   = "subiquity/http"
+  http_port_max    = 9200
+  http_port_min    = 9001
+  iso_checksum     = "${var.ISO-CHECKSUM}"
+  iso_urls         = ["${var.ISO-URL}"]
+  iso_storage_pool = "local"
+  memory           = "${var.MEMORY}"
+
+  network_adapters {
+    bridge = "vmbr0"
+    model  = "virtio"
+  }
+  network_adapters {
+    bridge = "vmbr1"
+    model  = "virtio"
+  }
+  network_adapters {
+    bridge = "vmbr2"
+    model  = "virtio"
+  }
+
+  os                       = "l26"
+  proxmox_url              = "${var.URL}"
+  insecure_skip_tls_verify = true
+  unmount_iso              = true
+  qemu_agent               = true
+  cloud_init               = true
+  cloud_init_storage_pool  = "local"
+  ssh_username             = "vagrant"
+  ssh_password             = "${var.SSHPW}"
+  ssh_timeout              = "28m"
+  template_description     = "A Packer template for a load-balancer"
+  vm_name                  = "${var.loadbalancer-VMNAME}"
+}
 
 build {
-  sources = ["source.proxmox-iso.frontend-webserver","source.proxmox-iso.backend-database"]
-
+  sources = ["source.proxmox-iso.frontend-webserver", "source.proxmox-iso.backend-database", "source.proxmox-iso.load-balancer"]
+  
   ########################################################################################################################
   # Using the file provisioner to SCP this file to the instance
   # Add .hcl configuration file to register an instance with Consul for dynamic DNS on the third interface
@@ -272,6 +329,20 @@ build {
                       "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]
   }
+
+  provisioner "shell" {
+    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    scripts = ["../scripts/proxmox/loadbalancer/post_install_prxmx_load-balancer-firewall-open-ports.sh",
+      "../scripts/proxmox/loadbalancer/post_install_prxmx_load_balancer.sh",
+    "../scripts/proxmox/loadbalancer/move-nginx-files.sh"]
+    only = ["proxmox-iso.load-balancer"]
+  }
+
+  provisioner "shell" {
+    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    scripts         = ["../scripts/proxmox/cleanup.sh"]
+  }
+
  ########################################################################################################################
   # Run the configurations for each element in the network - Focal Database
   ########################################################################################################################
