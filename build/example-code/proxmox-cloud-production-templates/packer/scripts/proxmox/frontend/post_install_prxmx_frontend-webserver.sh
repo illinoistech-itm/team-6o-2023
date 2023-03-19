@@ -54,3 +54,14 @@ pm2 start "npm run start" --name team6o
 # Save the state of process list
 pm2 save
 sudo chown vagrant:vagrant /home/vagrant/.pm2/rpc.sock /home/vagrant/.pm2/pub.sock
+
+###############################################################################
+# Using Find and Replace via sed to add in the secrets to connect to MySQL
+# There is a .env file containing an empty template of secrets -- essentially
+# this is a hack to pass environment variables into the vm instances
+###############################################################################
+
+sudo sed -i "s/FQDN=/FQDN=$FQDN/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/DBUSER=/DBUSER=$DBUSER/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/DBPASS=/DBPASS=$DBPASS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/DATABASE=/DATABASE=$DATABASE/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
