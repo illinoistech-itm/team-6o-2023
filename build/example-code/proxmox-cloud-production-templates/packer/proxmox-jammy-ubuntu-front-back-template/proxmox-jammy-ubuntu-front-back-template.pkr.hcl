@@ -315,7 +315,11 @@ build {
                        "CERTIFICATE=${var.CERTIFICATE}",
                        "SECRET=${var.SECRET}",
                        "ORIGIN1=${var.ORIGIN1}",
-                       "ORIGIN2=${var.ORIGIN2}"]
+                       "ORIGIN2=${var.ORIGIN2}",
+                       "DBUSER=${var.DBUSER}",
+                       "DBPASS=${var.DBPASS}",
+                       "DATABASE=${var.DATABASE}",
+                       "FQDN=${var.FQDN}"]
     scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_frontend-firewall-open-ports.sh",
                       "../scripts/proxmox/frontend/post_install_prxmx_frontend-webserver.sh"]
     only            = ["proxmox-iso.frontend-webserver"]
@@ -323,8 +327,9 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    environment_vars = ["USERNAME=${var.non-root-user-for-database-username}",
-                       "USERPASS=${var.non-root-user-for-database-password}"]
+    environment_vars = ["DBUSER=${var.DBUSER}",
+                       "IPRANGE=${var.CONNECTIONFROMIPRANGE}", 
+                       "DBPASS=${var.DBPASS}"]
     scripts         = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
                       "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]
