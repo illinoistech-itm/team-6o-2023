@@ -20,18 +20,18 @@ packer {
 ###########################################################################################
 source "proxmox-iso" "backend-database" {
   boot_command = [
-        "e<wait>",
-        "<down><down><down>",
-        "<end><bs><bs><bs><bs><wait>",
-        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
-        "<f10><wait>"
-      ]
-  boot_wait    = "5s"
-  cores        = "${var.NUMBEROFCORES}"
-  node         = "${var.NODENAME}"
-  username     = "${var.TOKEN_ID}"
-  token        = "${var.TOKEN_SECRET}"
-  cpu_type     = "host"
+    "e<wait>",
+    "<down><down><down>",
+    "<end><bs><bs><bs><bs><wait>",
+    "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+    "<f10><wait>"
+  ]
+  boot_wait = "5s"
+  cores     = "${var.NUMBEROFCORES}"
+  node      = "${var.NODENAME}"
+  username  = "${var.TOKEN_ID}"
+  token     = "${var.TOKEN_SECRET}"
+  cpu_type  = "host"
   disks {
     disk_size         = "${var.DISKSIZE}"
     storage_pool      = "${var.STORAGEPOOL}"
@@ -41,8 +41,8 @@ source "proxmox-iso" "backend-database" {
   http_directory   = "subiquity/http"
   http_port_max    = 9200
   http_port_min    = 9001
-  iso_checksum     = "sha256:10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb"
-  iso_urls         = ["https://mirrors.edge.kernel.org/ubuntu-releases/22.04.1/ubuntu-22.04.1-live-server-amd64.iso"]
+  iso_checksum     = "${var.ISO-CHECKSUM}"
+  iso_urls         = ["${var.ISO-URL}"]
   iso_storage_pool = "local"
   memory           = "${var.MEMORY}"
 
@@ -66,8 +66,8 @@ source "proxmox-iso" "backend-database" {
   qemu_agent               = true
   cloud_init               = true
   cloud_init_storage_pool  = "local"
-  ssh_password             = "vagrant"
-  ssh_username             = "${var.backend-SSHPW}"
+  ssh_username             = "vagrant"
+  ssh_password             = "${var.SSHPW}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for backend database"
   vm_name                  = "${var.backend-VMNAME}"
@@ -78,18 +78,18 @@ source "proxmox-iso" "backend-database" {
 ###########################################################################################
 source "proxmox-iso" "frontend-webserver" {
   boot_command = [
-        "e<wait>",
-        "<down><down><down>",
-        "<end><bs><bs><bs><bs><wait>",
-        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
-        "<f10><wait>"
-      ]
-  boot_wait    = "5s"
-  cores        = "${var.NUMBEROFCORES}"
-  node         = "${var.NODENAME}"
-  username     = "${var.TOKEN_ID}"
-  token        = "${var.TOKEN_SECRET}"
-  cpu_type     = "host"
+    "e<wait>",
+    "<down><down><down>",
+    "<end><bs><bs><bs><bs><wait>",
+    "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+    "<f10><wait>"
+  ]
+  boot_wait = "5s"
+  cores     = "${var.NUMBEROFCORES}"
+  node      = "${var.NODENAME}"
+  username  = "${var.TOKEN_ID}"
+  token     = "${var.TOKEN_SECRET}"
+  cpu_type  = "host"
   disks {
     disk_size         = "${var.DISKSIZE}"
     storage_pool      = "${var.STORAGEPOOL}"
@@ -99,8 +99,8 @@ source "proxmox-iso" "frontend-webserver" {
   http_directory   = "subiquity/http"
   http_port_max    = 9200
   http_port_min    = 9001
-  iso_checksum     = "sha256:10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb"
-  iso_urls         = ["https://mirrors.edge.kernel.org/ubuntu-releases/22.04.1/ubuntu-22.04.1-live-server-amd64.iso"]
+  iso_checksum     = "${var.ISO-CHECKSUM}"
+  iso_urls         = ["${var.ISO-URL}"]
   iso_storage_pool = "local"
   memory           = "${var.MEMORY}"
 
@@ -124,17 +124,74 @@ source "proxmox-iso" "frontend-webserver" {
   qemu_agent               = true
   cloud_init               = true
   cloud_init_storage_pool  = "local"
-  ssh_password             = "vagrant"
-  ssh_username             = "${var.frontend-SSHPW}"
+  ssh_username             = "vagrant"
+  ssh_password             = "${var.SSHPW}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for a frontend webserver"
   vm_name                  = "${var.frontend-VMNAME}"
 }
 
+###########################################################################################
+# This is a Packer build template for the load-balancer
+###########################################################################################
+source "proxmox-iso" "load-balancer" {
+  boot_command = [
+    "e<wait>",
+    "<down><down><down>",
+    "<end><bs><bs><bs><bs><wait>",
+    "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---<wait>",
+    "<f10><wait>"
+  ]
+  boot_wait = "5s"
+  cores     = "${var.NUMBEROFCORES}"
+  node      = "${var.NODENAME}"
+  username  = "${var.TOKEN_ID}"
+  token     = "${var.TOKEN_SECRET}"
+  cpu_type  = "host"
+  disks {
+    disk_size         = "${var.DISKSIZE}"
+    storage_pool      = "${var.STORAGEPOOL}"
+    storage_pool_type = "lvm"
+    type              = "virtio"
+  }
+  http_directory   = "subiquity/http"
+  http_port_max    = 9200
+  http_port_min    = 9001
+  iso_checksum     = "${var.ISO-CHECKSUM}"
+  iso_urls         = ["${var.ISO-URL}"]
+  iso_storage_pool = "local"
+  memory           = "${var.MEMORY}"
+
+  network_adapters {
+    bridge = "vmbr0"
+    model  = "virtio"
+  }
+  network_adapters {
+    bridge = "vmbr1"
+    model  = "virtio"
+  }
+  network_adapters {
+    bridge = "vmbr2"
+    model  = "virtio"
+  }
+
+  os                       = "l26"
+  proxmox_url              = "${var.URL}"
+  insecure_skip_tls_verify = true
+  unmount_iso              = true
+  qemu_agent               = true
+  cloud_init               = true
+  cloud_init_storage_pool  = "local"
+  ssh_username             = "vagrant"
+  ssh_password             = "${var.SSHPW}"
+  ssh_timeout              = "28m"
+  template_description     = "A Packer template for a load-balancer"
+  vm_name                  = "${var.loadbalancer-VMNAME}"
+}
 
 build {
-  sources = ["source.proxmox-iso.frontend-webserver","source.proxmox-iso.backend-database"]
-
+  sources = ["source.proxmox-iso.frontend-webserver", "source.proxmox-iso.backend-database", "source.proxmox-iso.load-balancer"]
+  
   ########################################################################################################################
   # Using the file provisioner to SCP this file to the instance
   # Add .hcl configuration file to register an instance with Consul for dynamic DNS on the third interface
@@ -251,7 +308,18 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    environment_vars = ["CLIENTID=${var.CLIENTID}",]
+    environment_vars = ["CLIENTID=${var.CLIENTID}",
+                       "PROJECTID=${var.PROJECTID}",
+                       "AUTHURI=${var.AUTHURI}",
+                       "TOKENURI=${var.TOKENURI}",
+                       "CERTIFICATE=${var.CERTIFICATE}",
+                       "SECRET=${var.SECRET}",
+                       "ORIGIN1=${var.ORIGIN1}",
+                       "ORIGIN2=${var.ORIGIN2}",
+                       "DBUSER=${var.DBUSER}",
+                       "DBPASS=${var.DBPASS}",
+                       "DATABASE=${var.DATABASE}",
+                       "FQDN=${var.FQDN}"]
     scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_frontend-firewall-open-ports.sh",
                       "../scripts/proxmox/frontend/post_install_prxmx_frontend-webserver.sh"]
     only            = ["proxmox-iso.frontend-webserver"]
@@ -259,12 +327,27 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    environment_vars = ["USERNAME=${var.non-root-user-for-database-username}",
-                       "USERPASS=${var.non-root-user-for-database-password}"]
+    environment_vars = ["DBUSER=${var.DBUSER}",
+                       "IPRANGE=${var.CONNECTIONFROMIPRANGE}", 
+                       "DBPASS=${var.DBPASS}"]
     scripts         = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
                       "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]
   }
+
+  provisioner "shell" {
+    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    scripts = ["../scripts/proxmox/loadbalancer/post_install_prxmx_load-balancer-firewall-open-ports.sh",
+      "../scripts/proxmox/loadbalancer/post_install_prxmx_load_balancer.sh",
+    "../scripts/proxmox/loadbalancer/move-nginx-files.sh"]
+    only = ["proxmox-iso.load-balancer"]
+  }
+
+  provisioner "shell" {
+    execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    scripts         = ["../scripts/proxmox/cleanup.sh"]
+  }
+
  ########################################################################################################################
   # Run the configurations for each element in the network - Focal Database
   ########################################################################################################################
