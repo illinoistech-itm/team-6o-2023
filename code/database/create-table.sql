@@ -3,9 +3,9 @@ USE team6o;
 CREATE TABLE IF NOT EXISTS accounts
 (
     uid int AUTO_INCREMENT,
-    name varchar(100) NOT NULL,
+    first_name varchar(100) NOT NULL,
     email varchar(100) NOT NULL,
-    password varchar(100) NOT NULL,
+    last_name varchar(100) NOT NULL,
     primary key(uid)
 );
 
@@ -18,5 +18,25 @@ CREATE TABLE IF NOT EXISTS images
   primary key(imageid),
     constraint fk_type
     foreign key(uid) 
-        references accounts(uid)
+      references accounts(uid)
+);
+
+CREATE TABLE IF NOT EXISTS posts
+(
+  pid int AUTO_INCREMENT
+  caption varchar(250),
+  primary key(pid),
+    constraint fk_type
+    foreign key(email)
+      references accounts(email)
+);
+
+CREATE TABLE IF NOT EXISTS comments
+(
+  cid int AUTO_INCREMENT
+  comment varchar(250),
+  primary key(cid),
+    constraint fk_type
+    foreign key(pid)
+      references posts(pid)
 );
