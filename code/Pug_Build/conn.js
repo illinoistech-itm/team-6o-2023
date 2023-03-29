@@ -13,7 +13,7 @@ async function asyncFunction() {
         
         conn = await pool.getConnection();
         const rows = await conn.query("SELECT * FROM accounts");
-        const res = await conn.query("INSERT INTO accounts (name, email, password) VALUES ('John', 'cool@email.com', 'Smith')");
+        const res = await conn.query("INSERT INTO accounts (name, email, last_name) VALUES ('John', 'cool@email.com', 'Smith')");
         console.log(res); //show insert statement
         console.log(rows); //Show values of table rows for accounts tables
     
@@ -24,4 +24,17 @@ async function asyncFunction() {
 }
 }
 
-asyncFunction();
+async function connection() {
+    try {
+        
+        conn = await pool.getConnection();
+        return conn;
+    
+} catch (err) {
+    throw err;
+} finally {
+    if (conn) return conn.end();
+}
+}
+
+//asyncFunction();
