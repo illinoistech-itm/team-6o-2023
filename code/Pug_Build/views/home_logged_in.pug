@@ -20,11 +20,19 @@ block content
                     a.nav-link.text-white(href='#') Profile
                     svg.bi.pe-none.me-2(width='16' height='16')
                         use(xlink:href='')
+            
             hr
-            .dropdown
+            a.d-flex.align-items-center.mb-4.mb-md-0.me-md-auto.text-white.text-decoration-none(href='/')
+                img.rounded-circle.me-2(src='https://github.com/pengu07.png' alt='' width='32' height='32')
+                svg.bi.pe-none.me-2(width='1' height='30')
+                    use(xlink:href='')
+                span.fs-5 Sign Out
+
+            //.dropdown
                 a.d-flex.align-items-center.text-white.text-decoration-none.dropdown-toggle(href='#' data-bs-toggle='dropdown' aria-expanded='false')
                     img.rounded-circle.me-2(src='https://github.com/pengu07.png' alt='' width='32' height='32')
                     strong  Test User 
+                        use(xlink:href='')
                 ul.dropdown-menu.dropdown-menu-dark.text-small.shadow
                     li
                         a.dropdown-item(href='#') New project...
