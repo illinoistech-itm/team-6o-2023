@@ -20,6 +20,10 @@ su - vagrant -c "git clone git@github.com:illinoistech-itm/team-6o-2023.git"
 # secrets into our systems when building your backend template 
 #############################################################################
 
+# Allow mariadb to access remote connections
+cd /etc/mysql/maria.conf.d
+sudo sed -i "s/127.0.0.1/0.0.0.0/" 50-server.cnf
+
 # Change directory to the location of your JS code
 cd /home/vagrant/team-6o-2023/code/database
 
