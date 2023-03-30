@@ -21,7 +21,7 @@ su - vagrant -c "git clone git@github.com:illinoistech-itm/team-6o-2023.git"
 #############################################################################
 
 # Allow mariadb to access remote connections
-cd /etc/mysql/maria.conf.d/
+cd /etc/mysql/mariadb.conf.d/
 sudo sed -i "s/127.0.0.1/0.0.0.0/" 50-server.cnf
 
 # Change directory to the location of your JS code
