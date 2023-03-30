@@ -5,6 +5,7 @@ const decoder = require ('jwt-decode')
 const connector = require ('../conn.js')
 require('dotenv').config();
 const mariadb = require("mariadb");
+const postController = require('../Posts/postController')
 const pool = mariadb.createPool({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USERNAME,
@@ -38,9 +39,7 @@ router.post('/', function(req, res, next) {
   res.redirect('/home/' + responsePayload.sub);
 });
 
-router.get('/:id', function(req, res, next) {
-  res.render('home_logged_in', {title: 'Authenticated', id: req.params.id});
-});
+router.get('/:id', postController.showPosts);
 
 async function signUp(responsePayload) {
   try {
