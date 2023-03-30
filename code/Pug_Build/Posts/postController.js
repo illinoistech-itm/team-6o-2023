@@ -15,9 +15,11 @@ exports.showPosts = async function(req, res, next){
 }
 
 exports.createPostPost = async function(req, res, next){
-    const newPost = new Post('', req.body.caption, Date(), req.body.email);
+    console.log(req);
+    console.log(res);
+    const newPost = new Post('', req.body.caption, Date(), "email");
     await createPost(newPost);
-    res.redirect(`/home/123123`)
+    res.redirect(`/home/profile`)
 }
 
 async function findAllPosts(){
@@ -34,8 +36,9 @@ async function findAllPosts(){
 }
 
 async function createPost (posts) {
-    const statement = await pool.prepare("INSERT INTO posts (caption, date, email) VALUES (?, ?, ?)");
-    const createdPost = await statement.execute(posts.caption, posts.date, posts.email);
-    console.log(`Post with ID ${createdPost.lastInsertRowid} has been created`);
+    conn = await pool.getConnection();
+    const statement = await conn.prepare("INSERT INTO posts (caption, date, email) VALUES (?, ?, ?)");
+    const createdPost = await statement.execute([posts.caption, posts.date, posts.email]);
+    //console.log(createdPost);
+   // console.log(`Post with ID ${createdPost.lastInsertRowid} has been created`);
 }
-
