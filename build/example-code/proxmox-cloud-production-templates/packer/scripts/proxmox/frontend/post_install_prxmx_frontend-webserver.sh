@@ -15,6 +15,10 @@ sudo apt-get install -y nodejs
 su - vagrant -c "git clone git@github.com:illinoistech-itm/team-6o-2023.git"
 cd ./team-6o-2023/code/Pug_Build
 
+touch .env
+
+printf "FQDN=\nDBUSER=\nDBPASS=\nDATABASE=\n" >> .env
+
 # Upgrade to latest NPM
 npm install -g npm@9.5.1
 
