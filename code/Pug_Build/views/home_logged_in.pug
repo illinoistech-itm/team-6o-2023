@@ -48,14 +48,12 @@ block content
             h1 Home page 
             p  Woah! Your google id is: #{id}.
             body
-                form(method='GET', name='postForm')
-                    h2 What's On Your Mind?
+                form(method='POST', name='postForm', action='/home/369369')
+                    h2 What Do You Mean? Woahhh ~
                     fieldset 
-                        p  
-                            label(for="email") Email Address:  
-                            input(type="text"  id="email" name="email" placeholder="example@hawk.iit.edu") 
                         div 
-                            textarea(name="posts", cols="40", rows="10", placeholder="Whats on your mind?") 
+                            label(for="caption") New Post:
+                            textarea(name="caption", cols="40", rows="10", placeholder="Whats on your mind?") 
                         div 
                             p 
                                 input(type="submit" value="Post Me")
