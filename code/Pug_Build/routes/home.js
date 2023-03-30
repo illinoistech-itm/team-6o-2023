@@ -40,6 +40,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:id', postController.showPosts);
+router.post('/:id', postController.createPostPost);
 
 async function signUp(responsePayload) {
   try {
