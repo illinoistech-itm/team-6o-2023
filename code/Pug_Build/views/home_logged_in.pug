@@ -59,3 +59,18 @@ block content
                         div 
                             p 
                                 input(type="submit" value="Post Me")
+
+                if posts.length>0 
+                    table(class="table table-hover table-light")
+                        thead 
+                            tr 
+                                th(scope="col") Caption 
+                                th(scope="col") Date 
+                                th(scope="col") Email 
+                        tbody 
+                            each value in posts 
+                                tr 
+                                    td= value.caption 
+                                    td= value.date 
+                                    td= value.email 
+                                    
