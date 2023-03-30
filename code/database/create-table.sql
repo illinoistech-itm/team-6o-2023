@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS posts
 (
   pid int AUTO_INCREMENT
   caption varchar(250),
+  date varchar(250),
   primary key(pid),
     constraint fk_type
     foreign key(email)
