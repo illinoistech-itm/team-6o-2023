@@ -13,7 +13,7 @@ const pool = mariadb.createPool({
     database: process.env.DATABASE_NAME,
 })
 
-let idValue;
+let conn;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -53,7 +53,7 @@ router.post('/:id', async function(req, res, next){
 async function signUp(responsePayload) {
   try {
       
-      conn = await pool.getConnection();
+      let conn = await pool.getConnection();
       const test = await conn.query("SELECT * FROM accounts WHERE email = ?",[responsePayload.email]);
       console.log(test);
       let result= String(test);
@@ -88,7 +88,7 @@ async function findAllPosts(){
 }
 
 async function createPost (posts) {
-    conn = await pool.getConnection();
+    let conn = await pool.getConnection();
     const statement = await conn.prepare("INSERT INTO posts (caption, date, email) VALUES (?, ?, ?)");
     const createdPost = await statement.execute([posts.caption, posts.date, posts.email]);
     //console.log(createdPost);
