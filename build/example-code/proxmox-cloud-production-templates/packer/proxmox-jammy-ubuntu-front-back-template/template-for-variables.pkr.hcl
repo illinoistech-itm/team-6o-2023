@@ -44,7 +44,7 @@ variable "DISKSIZE" {
 # Proxmox cloud -- No need to edit this
 variable "STORAGEPOOL" {
   type    = string
-  default = "datadisk5"
+  default = "datadisk3"
 }
 
 variable "NUMBEROFCORES" {
