@@ -7,4 +7,4 @@ class Post {
     }
 }
 
-module.export = Post;
+module.exports = Post;
