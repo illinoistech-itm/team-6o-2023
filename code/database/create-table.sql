@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS accounts
 (
     uid int AUTO_INCREMENT,
     first_name varchar(100) NOT NULL,
-    email varchar(100) NOT NULL UNIQUE,
+    email varchar(100) NOT NULL,
     last_name varchar(100) NOT NULL,
     primary key(uid)
 );
@@ -27,10 +27,7 @@ CREATE TABLE IF NOT EXISTS posts
   primary key(pid),
   caption varchar(250),
   date varchar(250),
-  email varchar(100) NOT NULL UNIQUE,
-    constraint fk_email
-    foreign key(email)
-      references accounts(email)
+  email varchar(100)
 );
 
 CREATE TABLE IF NOT EXISTS comments
