@@ -1,9 +1,8 @@
-
 var express = require('express');
 var router = express.Router();
 const decoder = require ('jwt-decode')
-require('dotenv').config();
 const postController = require('../Posts/postController')
+const { body, validationResult } = require ('express-validator');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,8 +33,18 @@ router.get('/:id', async function(req, res, next){
   res.render('home_logged_in',{title: 'Posts', posts: allPosts})
 })
 
-router.post('/:id', async function(req, res, next){
-  await postController.create({caption: req.body.caption, uid: 1});
+router.post('/:id',
+  body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'), 
+  async function(req, res, next){
+
+  const result = validationResult(req);
+  if (result.isEmpty() != true){
+    console.log("error posting")
+  }
+  else{
+    await postController.create({caption: req.body.caption, uid: 1});
+  }
+  
   res.redirect(`/home/feed`)
 });
 
