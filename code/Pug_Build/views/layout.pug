@@ -19,9 +19,10 @@ html
 
             ul.nav.nav-pills.flex-column.mb-auto
                 li.nav-item
-                    a.nav-link.active(href='/home/feed' aria-current='page') Home
-                    svg.bi.pe-none.me-2(width='16' height='16')
-                        use(xlink:href='')
+                  block currentPage
+                    a.nav-link.text-white(href='/home/feed' aria-current='page') Home
+                  svg.bi.pe-none.me-2(width='16' height='16')
+                      use(xlink:href='')
                 //li
                     a.nav-link.text-white(href='#') Profile
                     svg.bi.pe-none.me-2(width='16' height='16')

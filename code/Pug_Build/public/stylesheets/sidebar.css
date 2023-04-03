@@ -107,5 +107,6 @@ body {
   
   .scrollarea {
     overflow-y: auto;
+    width: 100vw;
   }
   
