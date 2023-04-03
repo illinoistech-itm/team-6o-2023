@@ -21,7 +21,7 @@ block content
                     thead 
                         tr 
                             th(scope="col") Caption 
-                            th(scope="col") Date 
+                            th(scope="col") Created 
                             th(scope="col") uid 
                             th(scope="col") pid
                             th(scope="col") Operations
@@ -29,7 +29,7 @@ block content
                         each value in posts 
                             tr 
                                 td= value.caption 
-                                td= value.date 
+                                td= value.created 
                                 td= value.uid 
                                 td= value.pid
                                 td
