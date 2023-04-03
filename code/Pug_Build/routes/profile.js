@@ -5,7 +5,7 @@ const { body, validationResult } = require ('express-validator');
 
 /* GET profile page. */
 router.get('/', async function(req, res, next) {
-    const allPosts = await postController.findAll();
+  const allPosts = await postController.findAll();
     res.render('profile', { title: 'Posts', posts: allPosts })
 });
 
@@ -14,10 +14,10 @@ router.get('/feed/posts/:id/edit', async function(req, res, next) {
     const post = await postController.findByID(req.params.id);
     let foundPost = post[0]
     res.render('post_edit', { title: 'Edit Post', post: foundPost });
-  });
+});
   
-  /* POST - Edit post */
-  router.post('/feed/posts/:id/edit',
+/* POST - Edit post */
+router.post('/feed/posts/:id/edit',
     body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'),
     async function(req, res, next) {
   
@@ -34,19 +34,19 @@ router.get('/feed/posts/:id/edit', async function(req, res, next) {
         await postController.update(updatedPost);
         res.redirect('/home/feed');
     }
-  });
+});
   
-  /* GET - Delete post */
-  router.get('/feed/posts/:id/delete', async function(req, res, next) {
+/* GET - Delete post */
+router.get('/feed/posts/:id/delete', async function(req, res, next) {
     const post = await postController.findByID(req.params.id);
     let foundPost = post[0]
     res.render('post_delete', { title: 'Delete post', post: foundPost});
-  });
+});
   
-  /* POST - Delete post */
-  router.post('/feed/posts/:id/delete', async function(req, res, next) {
+/* POST - Delete post */
+router.post('/feed/posts/:id/delete', async function(req, res, next) {
     await postController.delete(req.params.id);
     res.redirect('/home/feed')
-  });
+});
   
 module.exports = router;
