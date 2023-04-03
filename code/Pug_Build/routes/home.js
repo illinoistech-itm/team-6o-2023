@@ -2,18 +2,8 @@
 var express = require('express');
 var router = express.Router();
 const decoder = require ('jwt-decode')
-const connector = require ('../conn.js')
 require('dotenv').config();
-const mariadb = require("mariadb");
 const postController = require('../Posts/postController')
-const pool = mariadb.createPool({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-})
-
-let conn;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -38,18 +28,18 @@ router.post('/', function(req, res, next) {
   global.email = responsePayload.email;
   res.redirect('/home/' + responsePayload.sub);
 });
+
 router.get('/:id', async function(req, res, next){
-  const allPosts = await findAllPosts();
-  console.log(allPosts);
+  const allPosts = await postController.findAll();
   res.render('home_logged_in',{title: 'Posts', posts: allPosts})
 })
+
 router.post('/:id', async function(req, res, next){
-  console.log(req);
-  const newPost = new Post('', req.body.caption, Date(), global.email);
-  await createPost(newPost);
+  await postController.create({caption: req.body.caption, uid: 1});
   res.redirect(`/home/feed`)
 });
 
+/*
 async function signUp(responsePayload) {
   try {
       
@@ -71,28 +61,5 @@ async function signUp(responsePayload) {
 }
 }
 
-const Post = require('../Posts/post')
-
-
-async function findAllPosts(){
-    const statement = await pool.query("SELECT * FROM posts");
-    //console.log(statement);
-    const rows = statement;
-    let posts = [];
-    rows.forEach((row) => {
-        const post = new Post(row.pid, row.caption, row.date, row.email);
-        posts.push(post);
-    });
-    //console.log(posts);
-    return posts;
-}
-
-async function createPost (posts) {
-    let conn = await pool.getConnection();
-    const statement = await conn.prepare("INSERT INTO posts (caption, date, email) VALUES (?, ?, ?)");
-    const createdPost = await statement.execute([posts.caption, posts.date, posts.email]);
-    //console.log(createdPost);
-   // console.log(`Post with ID ${createdPost.lastInsertRowid} has been created`);
-}
-
+*/
 module.exports = router;

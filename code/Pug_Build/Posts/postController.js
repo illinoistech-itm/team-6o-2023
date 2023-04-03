@@ -8,6 +8,23 @@ const pool = mariadb.createPool({
 })
 const Post = require('./post')
 
+const postTableOperations = {
+
+    create: async (post) => {
+        const newPost = {
+            caption: post.caption,
+            created: new Date().toUTCString(),
+            uid: post.uid,
+        };
+
+        await pool.execute("INSERT INTO posts (caption, uid, date) VALUES (?, ?, ?)", [newPost.caption, newPost.uid, newPost.created]);
+    },
+    findAll: async () => await pool.query("SELECT * FROM posts"),
+    findByID: async (pid) => await pool.query("SELECT * FROM posts WHERE pid = ?", [pid]),
+    
+}
+
+/*
 exports.showPosts = async function(req, res, next){
     const allPosts = await findAllPosts();
     console.log(allPosts);
@@ -22,18 +39,6 @@ exports.createPostPost = async function(req, res, next){
     res.redirect(`/home/profile`)
 }
 
-async function findAllPosts(){
-    const statement = await pool.query("SELECT * FROM posts");
-    //console.log(statement);
-    const rows = statement;
-    let posts = [];
-    rows.forEach((row) => {
-        const post = new Post(row.pid, row.caption, row.date, row.email);
-        posts.push(post);
-    });
-    //console.log(posts);
-    return posts;
-}
 
 async function createPost (posts) {
     conn = await pool.getConnection();
@@ -42,3 +47,6 @@ async function createPost (posts) {
     //console.log(createdPost);
    // console.log(`Post with ID ${createdPost.lastInsertRowid} has been created`);
 }
+*/
+
+module.exports = postTableOperations;
