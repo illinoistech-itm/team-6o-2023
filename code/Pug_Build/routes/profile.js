@@ -10,14 +10,14 @@ router.get('/', async function(req, res, next) {
 });
 
 /* GET - Edit post */
-router.get('/feed/posts/:id/edit', async function(req, res, next) {
+router.get('/posts/:id/edit', async function(req, res, next) {
     const post = await postController.findByID(req.params.id);
     let foundPost = post[0]
     res.render('post_edit', { title: 'Edit Post', post: foundPost });
 });
   
 /* POST - Edit post */
-router.post('/feed/posts/:id/edit',
+router.post('/posts/:id/edit',
     body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'),
     async function(req, res, next) {
   
@@ -32,21 +32,21 @@ router.post('/feed/posts/:id/edit',
             caption: req.body.caption,
         };
         await postController.update(updatedPost);
-        res.redirect('/home/feed');
+        res.redirect('/profile/');
     }
 });
   
 /* GET - Delete post */
-router.get('/feed/posts/:id/delete', async function(req, res, next) {
+router.get('/posts/:id/delete', async function(req, res, next) {
     const post = await postController.findByID(req.params.id);
     let foundPost = post[0]
     res.render('post_delete', { title: 'Delete post', post: foundPost});
 });
   
 /* POST - Delete post */
-router.post('/feed/posts/:id/delete', async function(req, res, next) {
+router.post('/posts/:id/delete', async function(req, res, next) {
     await postController.delete(req.params.id);
-    res.redirect('/home/feed')
+    res.redirect('/profile')
 });
   
 module.exports = router;

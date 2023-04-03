@@ -7,9 +7,9 @@ block content
     .home-area.scrollarea.bg-light.p-5.rounded
         h1 Delete post 
         body
-            form(method='POST', action=`/home/feed/posts/${post.pid}/delete`)
+            form(method='POST', action=`/profile/posts/${post.pid}/delete`)
                 div(class="form-group")
                     label(for="caption") Post text
                     textarea(class="form-control", disabled, id="caption", name="caption", rows="3", placeholder='Whats on your mind?')= post.caption
                 button(type="submit", class="btn btn-primary") Delete Post
-                a(href='/home/feed', class="btn btn-danger") Cancel
+                a(href='/profile', class="btn btn-danger") Cancel
