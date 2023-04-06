@@ -66,4 +66,10 @@ router.post('/feed/',
     }
 });
 
+router.get('/logout', async function(req, res, next){
+    req.session.destroy();
+    res.redirect('/');
+})
+
+
 module.exports = router;
