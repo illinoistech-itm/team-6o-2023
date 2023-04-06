@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var sessions = require('express-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -20,6 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const oneHour = 1000 * 60 * 60;
+app.use(sessions({
+  secret: "coolKey",
+  saveUninitialized: true,
+  resave: false,
+  cookie: { maxAge: oneHour },
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
