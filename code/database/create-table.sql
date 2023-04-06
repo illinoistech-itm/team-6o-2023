@@ -23,21 +23,20 @@ CREATE TABLE IF NOT EXISTS images
 
 CREATE TABLE IF NOT EXISTS posts
 (
-  pid int AUTO_INCREMENT
+  pid int AUTO_INCREMENT,
+  primary key(pid),
   caption varchar(250),
   date varchar(250),
-  primary key(pid),
-    constraint fk_type
-    foreign key(email)
-      references accounts(email)
+  email varchar(100)
 );
 
 CREATE TABLE IF NOT EXISTS comments
 (
-  cid int AUTO_INCREMENT
+  cid int AUTO_INCREMENT,
   comment varchar(250),
+  pid int,
   primary key(cid),
-    constraint fk_type
+    constraint fk_pid
     foreign key(pid)
       references posts(pid)
 );

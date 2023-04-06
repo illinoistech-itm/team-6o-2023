@@ -15,6 +15,10 @@ sudo apt-get install -y nodejs
 su - vagrant -c "git clone git@github.com:illinoistech-itm/team-6o-2023.git"
 cd ./team-6o-2023/code/Pug_Build
 
+touch .env
+
+printf "FQDN=\nDBUSER=\nDBPASS=\nDATABASE=\n" >> .env
+
 # Upgrade to latest NPM
 npm install -g npm@9.5.1
 
@@ -54,7 +58,7 @@ sudo chown vagrant:vagrant /home/vagrant/.pm2/rpc.sock /home/vagrant/.pm2/pub.so
 # this is a hack to pass environment variables into the vm instances
 ###############################################################################
 
-sudo sed -i "s/FQDN=/FQDN=$FQDN/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
-sudo sed -i "s/DBUSER=/DBUSER=$DBUSER/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
-sudo sed -i "s/DBPASS=/DBPASS=$DBPASS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
-sudo sed -i "s/DATABASE=/DATABASE=$DATABASE/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/FQDN=/DATABASE_HOST=$FQDN/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/DBUSER=/DATABASE_USERNAME=$DBUSER/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/DBPASS=/DATABASE_PASSWORD=$DBPASS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/DATABASE=/DATABASE_NAME=$DATABASE/" /home/vagrant/team-6o-2023/code/Pug_Build/.env

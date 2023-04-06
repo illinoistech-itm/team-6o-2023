@@ -3,15 +3,13 @@ extends layout
 block customcss 
   link(rel='stylesheet' href='/stylesheets/sidebar.css')
 
-block currentPage
-    a.nav-link.active(href='/home/feed' aria-current='page') Home
 block content
     .home-area.scrollarea.bg-light.p-5.rounded
-        h1 Home page
+        h1 Home page 
         body
             form(method='POST', name='postForm', action='/home/feed')
                 h2 New Post:
-                fieldset
+                fieldset 
                     div 
                         textarea(name="caption", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
                     div 
@@ -26,6 +24,7 @@ block content
                             th(scope="col") Created 
                             th(scope="col") uid 
                             th(scope="col") pid
+                            th(scope="col") Operations
                     tbody 
                         each value in posts 
                             tr 
@@ -33,3 +32,7 @@ block content
                                 td= value.created 
                                 td= value.uid 
                                 td= value.pid
+                                td
+                                    a(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'
+                                    a(href=`/profile/posts/${value.pid}/delete`, class="btn btn-danger")= 'Delete Post'
+                                

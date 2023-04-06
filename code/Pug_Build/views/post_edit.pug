@@ -1,0 +1,19 @@
+extends layout
+
+block customcss 
+  link(rel='stylesheet' href='/stylesheets/sidebar.css')
+
+block content
+    .home-area.scrollarea.bg-light.p-5.rounded
+        h1 Edit post 
+            if message
+                ul
+                    each value in message
+                        li(class="text-danger")=value.msg
+        body
+            form(method='POST', action=`/profile/posts/${post.pid}/edit`)
+                div(class="form-group")
+                    label(for="caption") Post text
+                    textarea(class="form-control", id="caption", name="caption", rows="3", placeholder='Whats on your mind?')= post.caption
+                button(type="submit", class="btn btn-primary") Update Post
+                a(href='/profile', class="btn btn-danger") Cancel
