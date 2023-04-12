@@ -22,7 +22,7 @@ block content
                         tr 
                             th(scope="col") Caption 
                             th(scope="col") Created 
-                            th(scope="col") uid 
+                            th(scope="col") Email 
                             th(scope="col") pid
                             th(scope="col") Operations
                     tbody 
@@ -30,7 +30,7 @@ block content
                             tr 
                                 td= value.caption 
                                 td= value.created 
-                                td= value.uid 
+                                td= account.email
                                 td= value.pid
                                 td
                                     a(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'

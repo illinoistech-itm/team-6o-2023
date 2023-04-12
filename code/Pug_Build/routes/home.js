@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const decoder = require ('jwt-decode')
 const postController = require('../Posts/postController')
+const accountsController = require('../accounts/accountController')
 const { body, validationResult } = require ('express-validator');
 const login = require('../login/login')
 
@@ -35,7 +36,14 @@ router.post('/', async function(req, res, next) {
 router.get('/feed/', async function(req, res, next){
   if(await login.checkLogin(req.session)){
     const allPosts = await postController.findAll();
-    res.render('home_logged_in',{title: 'Posts', posts: allPosts})
+    const editedPosts = []
+    for (let i = 0; i < allPosts.length; i++) {
+      let editedPost = allPosts[i]
+      let emailOfPost = await accountsController.findByID(editedPost.uid)
+      editedPost["email"] = emailOfPost[0].email
+      editedPosts[i] = editedPost
+    }
+    res.render('home_logged_in',{title: 'Posts', posts: editedPosts})
   }
 
   else{
