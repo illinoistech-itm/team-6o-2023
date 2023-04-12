@@ -3,6 +3,7 @@ h1{
 }
 
 .date-time{
+    font-size: 0.75em;
     font-style: italic;
 }
 
@@ -16,9 +17,10 @@ p{
 }
 
 .post{
-    margin: 0 0 2em 0;
-    padding: 0 0 1em 0;
-    border-bottom: #54525295 1px solid;   
+    margin: 2em 1em 2em 0;
+    padding: 1em 1em 1em 1em;
+    border: 1px solid #54525295;
+    border-radius: 5px; 
 }
 
 .post-by{
