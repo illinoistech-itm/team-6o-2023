@@ -8,7 +8,7 @@ h1{
 }
 
 input {
-    width: 30%;
+    width: 100%;
     margin: 0 0 1em 0;
 }
 
@@ -18,11 +18,23 @@ p{
 
 .post{
     margin: 2em 1em 2em 0;
-    padding: 1em 1em 1em 1em;
+    padding: 1em 8em 1em 8em;
+    border: 1px solid #54525295;
+    border-radius: 5px; 
+}
+
+.profile-post{
+    margin: 2em 1em 2em 0;
+    padding: 1em 2em 1em 2em;
     border: 1px solid #54525295;
     border-radius: 5px; 
 }
 
 .post-by{
     color: #54525295; 
+}
+
+.post-form{
+    display: flex;
+    justify-content: space-evenly;
 }
