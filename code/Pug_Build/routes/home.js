@@ -5,6 +5,16 @@ const postController = require('../Posts/postController')
 const accountsController = require('../accounts/accountController')
 const { body, validationResult } = require ('express-validator');
 const login = require('../login/login')
+require('dotenv').config();
+const aws = require('aws-sdk')
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  signatureVersion: 'v4'
+})
+
+var params = {Bucket: process.env.AWS_BUCKET_NAME, Key: ''}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -36,11 +46,23 @@ router.post('/', async function(req, res, next) {
 router.get('/feed/', async function(req, res, next){
   if(await login.checkLogin(req.session)){
     const allPosts = await postController.findAll();
+    console.log(allPosts)
     const editedPosts = []
     for (let i = 0; i < allPosts.length; i++) {
       let editedPost = allPosts[i]
       let emailOfPost = await accountsController.findByID(editedPost.uid)
       editedPost["email"] = emailOfPost[0].email
+      editedPosts[i] = editedPost
+    }
+    for (let i = 0; i < editedPosts.length; i++) {
+      let editedPost = editedPosts[i]
+      if(editedPost.image != null){
+        params.Key = editedPost.image
+        let promise = s3.getSignedUrlPromise('getObject', params)
+        promise.then(function(signedUrl){
+          editedPost["signedURL"] = signedUrl
+        })
+      }
       editedPosts[i] = editedPost
     }
     res.render('home_logged_in',{title: 'Posts', posts: editedPosts})
@@ -54,7 +76,7 @@ router.get('/feed/', async function(req, res, next){
 router.post('/feed/',
   body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'), 
   async function(req, res, next){
-    console.log(req.session)
+    //console.log(req.session)
     if(await login.checkLogin(req.session)){
 
       const result = validationResult(req);
@@ -63,10 +85,27 @@ router.post('/feed/',
       }
 
       else{
-        await postController.create({caption: req.body.caption, uid: req.session.userID})
+        
+        if(req.files == null){
+          await postController.create({caption: req.body.caption, uid: req.session.userID})
+        }
+        else{
+          const file = req.files.name;
+          const bucketParams = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: req.session.userID + Date.parse(new Date()).toString(),
+            Body: file.data,
+          };
+          try {
+            const data = await s3.upload(bucketParams).promise();
+            console.log(data)
+            await postController.createWithImage({caption: req.body.caption, uid: req.session.userID, image: data.key})
+            res.redirect(`/home/feed`)
+          } catch (err) {
+            console.log("Error", err);
+          }
+        }
       }
-      
-      res.redirect(`/home/feed`)
     }
 
     else{
