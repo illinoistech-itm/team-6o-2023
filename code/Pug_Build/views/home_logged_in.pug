@@ -39,5 +39,7 @@ block content
                         each value in posts
                             div(class="post")
                                 h5 #{value.caption}
+                                if value.image != null
+                                    img(src=value.signedURL)
                                 p(class="post-by") Posted by: #{value.email}
                                 p(class="date-time") #{value.created}

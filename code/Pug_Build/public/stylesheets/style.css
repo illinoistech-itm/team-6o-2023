@@ -38,3 +38,7 @@ p{
     display: flex;
     justify-content: space-evenly;
 }
+
+img {
+    max-width: 12em;
+}

@@ -11,7 +11,8 @@ const aws = require('aws-sdk')
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  signatureVersion: 'v4'
+  signatureVersion: 'v4',
+  region: 'us-east-2'
 })
 
 var params = {Bucket: process.env.AWS_BUCKET_NAME, Key: ''}
@@ -46,25 +47,18 @@ router.post('/', async function(req, res, next) {
 router.get('/feed/', async function(req, res, next){
   if(await login.checkLogin(req.session)){
     const allPosts = await postController.findAll();
-    console.log(allPosts)
     const editedPosts = []
     for (let i = 0; i < allPosts.length; i++) {
       let editedPost = allPosts[i]
       let emailOfPost = await accountsController.findByID(editedPost.uid)
       editedPost["email"] = emailOfPost[0].email
-      editedPosts[i] = editedPost
-    }
-    for (let i = 0; i < editedPosts.length; i++) {
-      let editedPost = editedPosts[i]
       if(editedPost.image != null){
         params.Key = editedPost.image
-        let promise = s3.getSignedUrlPromise('getObject', params)
-        promise.then(function(signedUrl){
-          editedPost["signedURL"] = signedUrl
-        })
+        editedPost["signedURL"] = await s3.getSignedUrlPromise('getObject', params)
       }
-      editedPosts[i] = editedPost
+    editedPosts[i] = editedPost
     }
+    console.log(editedPosts)
     res.render('home_logged_in',{title: 'Posts', posts: editedPosts})
   }
 
