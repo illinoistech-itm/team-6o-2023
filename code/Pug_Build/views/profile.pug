@@ -5,9 +5,9 @@ block customcss
 
 block content
     .home-area.scrollarea.bg-light.p-5.rounded
-        h1 Home page 
+        h1 Profile page 
         body
-            form(method='POST', name='postForm', action='/home/feed')
+            //form(method='POST', name='postForm', action='/home/feed')
                 h2 New Post:
                 fieldset 
                     div 
@@ -17,7 +17,7 @@ block content
                             input(type="submit" value="Post Me")
 
             if posts.length>0 
-                table(class="table table-hover table-light")
+                //table(class="table table-hover table-light")
                     thead 
                         tr 
                             th(scope="col") Caption 
@@ -35,4 +35,10 @@ block content
                                 td
                                     a(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'
                                     a(href=`/profile/posts/${value.pid}/delete`, class="btn btn-danger")= 'Delete Post'
+                each value in posts
+                    div(class="post")
+                        h5 #{value.caption}
+                        p(class="date-time") #{value.created}
+                        a(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'
+                        a(href=`/profile/posts/${value.pid}/delete`, class="btn btn-danger")= 'Delete Post'
                                 

@@ -1,0 +1,26 @@
+h1{
+    margin: 0 0 1em 0;
+}
+
+.date-time{
+    font-style: italic;
+}
+
+input {
+    width: 30%;
+    margin: 0 0 1em 0;
+}
+
+p{
+    margin: 0 0 0.5em 0;
+}
+
+.post{
+    margin: 0 0 2em 0;
+    padding: 0 0 1em 0;
+    border-bottom: #54525295 1px solid;   
+}
+
+.post-by{
+    color: #54525295; 
+}

@@ -19,7 +19,7 @@ block content
                             input(type="submit" value="Post Me")
 
             if posts.length>0 
-                table(class="table table-hover table-light")
+                //table(class="table table-hover table-light")
                     thead 
                         tr 
                             th(scope="col") Caption 
@@ -33,3 +33,8 @@ block content
                                 td= value.created 
                                 td= value.email
                                 td= value.pid
+                each value in posts
+                    div(class="post")
+                        h5 #{value.caption}
+                        p(class="post-by") Posted by: #{value.email}
+                        p(class="date-time") #{value.created}
