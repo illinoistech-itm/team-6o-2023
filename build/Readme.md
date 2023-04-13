@@ -177,5 +177,6 @@ If you add any other secrets. Make sure insert how to view them within this tuto
 14. To insert a secret, use the following command. Type: `vault kv put -mount=secret name-of-secret desired-variables-for-secret`. 
 
 15. Now that you have added secrets to vault, exit our vault server. 
+
 ![*VaultStep15*](./media/VaultTutorialStep15.jpg "VaultStep15")
 
