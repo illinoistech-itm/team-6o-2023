@@ -84,3 +84,43 @@ Backend scripts located in build/example-code/proxmox-cloud-production-templates
 - Create and autoinject database
 
 ![Backend VM](media/backend.png "Backend")
+
+
+## Hashicorp Vault Tutorial
+
+**NOTE:** You must complete Grace's tutorial before starting this tutorial. Otherwise, this tutorial will make zero sense. 
+
+1. First, SSH into our project build server using your account and public Id. 
+- Your file path will look different depending on where you store your public ID.
+- Use the same format as me, but replace my credentials with your credentails.
+![*VaultStep1*](./media/VaultTutorialStep1.jpg "VaultStep1")
+
+If your login is successful, the following output will appear:
+
+![*VaultStep1.2*](./media/VaultTutorialStep1.2.jpg "VaultStep1.2")
+
+2. Type: `cd team-6o-2023/`. Press Enter.
+
+![*VaultStep2*](./media/VaultTutorialStep2.jpg "VaultStep2")
+
+3. Type: `cd build/`. Press Enter.
+
+![*VaultStep3*](./media/VaultTutorialStep3.jpg "VaultStep3")
+
+4. Type: `cd example-code/`. Press Enter.
+
+![*VaultStep4*](./media/VaultTutorialStep4.jpg "VaultStep4")
+
+5. Type: `cd proxmox-cloud-production-templates/`. Press Enter.
+
+![*VaultStep5*](./media/VaultTutorialStep5.jpg "VaultStep5")
+
+6. Type: `cd packer/`. Press Enter.
+
+![*VaultStep6*](./media/VaultTutorialStep6.jpg "VaultStep6")
+
+7. Type: `cd proxmox-jammy-ubuntu-front-back-template/`. Press Enter.
+
+![*VaultStep7*](./media/VaultTutorialStep7.jpg "VaultStep7")
+    
+
