@@ -122,5 +122,12 @@ If your login is successful, the following output will appear:
 7. Type: `cd proxmox-jammy-ubuntu-front-back-template/`. Press Enter.
 
 ![*VaultStep7*](./media/VaultTutorialStep7.jpg "VaultStep7")
-    
+
+8. Type: `ls`. Press Enter. To check the contents of the selected directory.
+
+- The `ls` command will show all contents of the current selected directory (folder).
+
+**NOTE** : The contents of the directory should match the screenshot below.
+
+![*VaultStep8*](./media/VaultTutorialStep8.jpg "VaultStep8")
 
