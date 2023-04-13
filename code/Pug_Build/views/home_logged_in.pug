@@ -9,27 +9,37 @@ block content
     .home-area.scrollarea.bg-light.p-5.rounded
         h1 Home page
         body
-            form(method='POST', name='postForm', action='/home/feed')
-                h2 New Post:
-                fieldset
-                    div 
-                        textarea(name="caption", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
-                    div 
-                        p 
-                            input(type="submit" value="Post Me")
+            div(class="post-form")
+                div
+                    form(method='POST', name='postForm', action='/home/feed', enctype="multipart/form-data")
+                        h2 New Post:
+                        fieldset
+                            div 
+                                textarea(name="caption", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
+                            div 
+                                p 
+                                    input(type="submit" value="Post Me")
 
-            if posts.length>0 
-                table(class="table table-hover table-light")
-                    thead 
-                        tr 
-                            th(scope="col") Caption 
-                            th(scope="col") Created 
-                            th(scope="col") uid 
-                            th(scope="col") pid
-                    tbody 
-                        each value in posts 
-                            tr 
-                                td= value.caption 
-                                td= value.created 
-                                td= value.uid 
-                                td= value.pid
+                div
+                    if posts.length>0 
+                        //table(class="table table-hover table-light")
+                            thead 
+                                tr 
+                                    th(scope="col") Caption 
+                                    th(scope="col") Created 
+                                    th(scope="col") email 
+                                    th(scope="col") pid
+                            tbody 
+                                each value in posts 
+                                    tr 
+                                        td= value.caption 
+                                        td= value.created 
+                                        td= value.email
+                                        td= value.pid
+                        each value in posts
+                            div(class="post")
+                                h5 #{value.caption}
+                                if value.image != null
+                                    img(src=value.signedURL)
+                                p(class="post-by") Posted by: #{value.email}
+                                p(class="date-time") #{value.created}

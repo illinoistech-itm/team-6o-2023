@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const postController = require('../Posts/postController')
+const accountsController = require('../accounts/accountController')
 const { body, validationResult } = require ('express-validator');
 const login = require('../login/login')
 
 /* GET profile page. */
 router.get('/', async function(req, res, next) {
     if(await login.checkLogin(req.session)){
-        const allPosts = await postController.findAll();
-        res.render('profile', { title: 'Posts', posts: allPosts })
+        const allUsersPosts = await postController.findByUID(req.session.userID)
+        const userAccount = await accountsController.findByID(req.session.userID)
+        res.render('profile', { title: 'Posts', posts: allUsersPosts, account: userAccount[0] })
     }
     
     else{
