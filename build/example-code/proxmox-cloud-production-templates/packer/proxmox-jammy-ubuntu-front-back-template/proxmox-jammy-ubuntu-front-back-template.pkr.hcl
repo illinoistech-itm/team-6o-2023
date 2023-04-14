@@ -321,8 +321,8 @@ build {
                        "DATABASE=${local.db_name}",
                        "FQDN=${local.db_FQDN}",
                        "AWSACCESS=${local.aws_access}",
-                       "AWSBUCKET${local.aws_bucket}",
-                       "AWSSECRET${local.aws_secret}"]
+                       "AWSBUCKET=${local.aws_bucket}",
+                       "AWSSECRET=${local.aws_secret}"]
     scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_frontend-firewall-open-ports.sh",
                       "../scripts/proxmox/frontend/post_install_prxmx_frontend-webserver.sh"]
     only            = ["proxmox-iso.frontend-webserver"]

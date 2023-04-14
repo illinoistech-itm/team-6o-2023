@@ -4,13 +4,35 @@ const postController = require('../Posts/postController')
 const accountsController = require('../accounts/accountController')
 const { body, validationResult } = require ('express-validator');
 const login = require('../login/login')
+require('dotenv').config();
+const aws = require('aws-sdk')
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  signatureVersion: 'v4',
+  region: 'us-east-2'
+})
+
+var params = {Bucket: process.env.AWS_BUCKET_NAME, Key: ''}
 
 /* GET profile page. */
 router.get('/', async function(req, res, next) {
     if(await login.checkLogin(req.session)){
-        const allUsersPosts = await postController.findByUID(req.session.userID)
-        const userAccount = await accountsController.findByID(req.session.userID)
-        res.render('profile', { title: 'Posts', posts: allUsersPosts, account: userAccount[0], userFirstName: req.session.firstName })
+            const allUsersPosts = await postController.findByUID(req.session.userID)
+            const userAccount = await accountsController.findByID(req.session.userID)
+            const editedPosts = []
+            for (let i = 0; i < allUsersPosts.length; i++) {
+              let editedPost = allUsersPosts[i]
+              if(editedPost.image != null){
+                params.Key = editedPost.image
+                editedPost["signedURL"] = await s3.getSignedUrlPromise('getObject', params)
+              }
+              
+              editedPosts[i] = editedPost
+            }
+
+        res.render('profile', { title: 'Posts', posts: editedPosts, account: userAccount[0], userFirstName: req.session.firstName })
     }
     
     else{
