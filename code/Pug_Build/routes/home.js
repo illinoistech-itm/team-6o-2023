@@ -3,6 +3,7 @@ var router = express.Router();
 const decoder = require ('jwt-decode')
 const postController = require('../Posts/postController')
 const accountsController = require('../accounts/accountController')
+const commentsController = require('../comments/commentController')
 const { body, validationResult } = require ('express-validator');
 const login = require('../login/login')
 require('dotenv').config();
@@ -34,7 +35,7 @@ router.post('/', async function(req, res, next) {
     session.userID = await login.signup(responsePayload);
     session.userEmail = responsePayload.email;
     session.token = responsePayload.jti;
-    console.log(req.session);
+    //console.log(req.session);
     res.redirect('/home/feed/');
   } catch (error) {
     console.log(error)
@@ -50,15 +51,27 @@ router.get('/feed/', async function(req, res, next){
     const editedPosts = []
     for (let i = 0; i < allPosts.length; i++) {
       let editedPost = allPosts[i]
-      let emailOfPost = await accountsController.findByID(editedPost.uid)
-      editedPost["email"] = emailOfPost[0].email
+      let userOfPost = await accountsController.findByID(editedPost.uid)
+      editedPost["first_name"] = userOfPost[0].first_name
+      editedPost["last_name"] = userOfPost[0].last_name
       if(editedPost.image != null){
         params.Key = editedPost.image
         editedPost["signedURL"] = await s3.getSignedUrlPromise('getObject', params)
       }
-    editedPosts[i] = editedPost
+      const checkComments = []
+      checkComments[0] = await commentsController.findByPID(editedPost.pid);
+      editedPost["comments"] = checkComments[0]
+      for (let j = 0; j < editedPost.comments.length; j++) {
+        let userOfComment = await accountsController.findByID(editedPost.comments[j].uid)
+        //console.log(emailOfComment)
+        editedPost.comments[j]["first_name"] = userOfComment[0].first_name
+        editedPost.comments[j]["last_name"] = userOfComment[0].last_name
+        //console.log(editedPost)
+      }
+      
+      editedPosts[i] = editedPost
     }
-    console.log(editedPosts)
+    //console.log(editedPosts)
     res.render('home_logged_in',{title: 'Posts', posts: editedPosts})
   }
 
@@ -67,21 +80,26 @@ router.get('/feed/', async function(req, res, next){
   }
 })
 
-router.post('/feed/',
-  body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'), 
+router.post('/feed/post',
+  body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'),
+  body('caption').trim().isLength({max: 250}).withMessage('The caption cannot be empty!'),
   async function(req, res, next){
-    //console.log(req.session)
     if(await login.checkLogin(req.session)){
-
       const result = validationResult(req);
+      //console.log(result)
       if (result.isEmpty() != true){
         console.log("error posting")
       }
 
       else{
-        
         if(req.files == null){
-          await postController.create({caption: req.body.caption, uid: req.session.userID})
+          try {
+            await postController.create({caption: req.body.caption, uid: req.session.userID})
+            res.redirect(`/home/feed`)
+          } 
+          catch (error) {
+            console.log("Error", err);
+          }
         }
         else{
           const file = req.files.image;
@@ -92,7 +110,7 @@ router.post('/feed/',
           };
           try {
             const data = await s3.upload(bucketParams).promise();
-            console.log(data)
+            //console.log(data)
             await postController.createWithImage({caption: req.body.caption, uid: req.session.userID, image: data.key})
             res.redirect(`/home/feed`)
           } catch (err) {
@@ -102,6 +120,32 @@ router.post('/feed/',
       }
     }
 
+    else{
+      res.redirect('/error/login')
+    }
+});
+
+router.post('/feed/:pid',
+  body('commentText').trim().notEmpty().withMessage('The comment cannot be empty!'), 
+  async function(req, res, next){
+    
+    if(await login.checkLogin(req.session)){
+      const result = validationResult(req);
+      //console.log(result)
+      if (result.isEmpty() != true){
+        console.log("error posting")
+      }
+      else{
+        try {
+          //console.log(req.body.commentText)
+          await commentsController.create({comment: req.body.commentText, uid: req.session.userID, pid: req.params.pid})
+          res.redirect(`/home/feed`)
+        } 
+        catch (err) {
+          console.log("Error", err);
+        }
+      }
+    }
     else{
       res.redirect('/error/login')
     }

@@ -11,7 +11,7 @@ block content
         body
             div(class="post-form")
                 div
-                    form(method='POST', name='postForm', action='/home/feed', enctype="multipart/form-data")
+                    form(method='POST', name='postForm', action='/home/feed/post', enctype="multipart/form-data")
                         h2 New Post:
                         fieldset
                             div 
@@ -43,5 +43,15 @@ block content
                                 h5 #{value.caption}
                                 if value.image != null
                                     img(src=value.signedURL)
-                                p(class="post-by") Posted by: #{value.email}
+                                p(class="post-by") Posted by: #{value.first_name} #{value.last_name}
                                 p(class="date-time") #{value.created}
+                                div
+                                    if value.comments.length > 0
+                                        each comment in value.comments
+                                            p Posted by: #{comment.first_name} #{comment.last_name}
+                                            p #{comment.date}
+                                            p #{comment.comment}
+                                div
+                                    form(method='POST', name='commentForm', action=`/home/feed/${value.pid}`)
+                                        input(type="text", name = "commentText", id = "commentText")
+                                        input(type="submit" value="Post Comment")
