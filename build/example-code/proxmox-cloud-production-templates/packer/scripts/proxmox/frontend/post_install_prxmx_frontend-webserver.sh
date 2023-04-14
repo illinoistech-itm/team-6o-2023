@@ -17,7 +17,7 @@ cd ./team-6o-2023/code/Pug_Build
 
 touch .env
 
-printf "FQDN=\nDBUSER=\nDBPASS=\nDATABASE=\n" >> .env
+printf "FQDN=\nDBUSER=\nDBPASS=\nDATABASE=\nAWSACCESS=\nAWSSECRET=\nAWSBUCKET=" >> .env
 
 # Upgrade to latest NPM
 npm install -g npm@9.5.1
@@ -62,3 +62,6 @@ sudo sed -i "s/FQDN=/DATABASE_HOST=$FQDN/" /home/vagrant/team-6o-2023/code/Pug_B
 sudo sed -i "s/DBUSER=/DATABASE_USERNAME=$DBUSER/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
 sudo sed -i "s/DBPASS=/DATABASE_PASSWORD=$DBPASS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
 sudo sed -i "s/DATABASE=/DATABASE_NAME=$DATABASE/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/AWSACCESS=/AWS_ACCESS_KEY=$AWSACCESS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/AWSSECRET=/AWS_SECRET_ACCESS_KEY=$AWSSECRET/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s/AWSBUCKET=/AWS_BUCKET_NAME=$AWSBUCKET/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
