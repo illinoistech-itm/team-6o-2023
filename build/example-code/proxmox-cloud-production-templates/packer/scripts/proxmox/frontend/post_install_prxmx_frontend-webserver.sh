@@ -63,5 +63,5 @@ sudo sed -i "s/DBUSER=/DATABASE_USERNAME=$DBUSER/" /home/vagrant/team-6o-2023/co
 sudo sed -i "s/DBPASS=/DATABASE_PASSWORD=$DBPASS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
 sudo sed -i "s/DATABASE=/DATABASE_NAME=$DATABASE/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
 sudo sed -i "s/AWSACCESS=/AWS_ACCESS_KEY=$AWSACCESS/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
-sudo sed -i "s/AWSSECRET=/AWS_SECRET_ACCESS_KEY=$AWSSECRET/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
+sudo sed -i "s:AWSSECRET=:AWS_SECRET_ACCESS_KEY=$AWSSECRET:" /home/vagrant/team-6o-2023/code/Pug_Build/.env
 sudo sed -i "s/AWSBUCKET=/AWS_BUCKET_NAME=$AWSBUCKET/" /home/vagrant/team-6o-2023/code/Pug_Build/.env
