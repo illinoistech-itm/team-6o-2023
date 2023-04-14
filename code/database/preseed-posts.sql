@@ -58,4 +58,5 @@ INSERT INTO `itmt430`.`posts` (`caption`, `uid`, `created`, `image`) VALUES ('go
 INSERT INTO `itmt430`.`posts` (`caption`, `uid`, `created`, `image`) VALUES ('go goku', '6', 'Fri, 14 Apr 2023 00:34:12 GMT', 'Goku 2.png');
 INSERT INTO `itmt430`.`posts` (`caption`, `uid`, `created`, `image`) VALUES ('it me goku', '6', 'Fri, 14 Apr 2023 00:34:12 GMT', 'Goku 1.png');
 INSERT INTO `itmt430`.`posts` (`caption`, `uid`, `created`, `image`) VALUES ('hello professor hajek', '6', 'Fri, 14 Apr 2023 00:34:12 GMT', 'Goku 2.png');
+INSERT INTO `itmt430`.`posts` (`caption`, `uid`, `created`, `image`) VALUES ('henlo', '7', 'Fri, 14 Apr 2023 00:34:12 GMT', 'Blue Bird.jpg');
 
