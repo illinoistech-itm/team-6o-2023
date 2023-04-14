@@ -42,3 +42,6 @@ sudo mysql -e "GRANT SELECT,INSERT,CREATE TEMPORARY TABLES ON team6o.* TO '${DBU
 sudo mysql < ./create-database.sql
 sudo mysql < ./create-table.sql
 sudo mysql < ./create-user-with-permissions.sql
+sudo mysql < ./preseed-users.sql
+sudo mysql < ./preseed-posts.sql
+sudo mysql < ./preseed-comments.sql

@@ -67,7 +67,7 @@ source "proxmox-iso" "backend-database" {
   cloud_init               = true
   cloud_init_storage_pool  = "local"
   ssh_username             = "vagrant"
-  ssh_password             = "${var.SSHPW}"
+  ssh_password             = "${local.user-ssh-password}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for backend database"
   vm_name                  = "${var.backend-VMNAME}"
@@ -125,7 +125,7 @@ source "proxmox-iso" "frontend-webserver" {
   cloud_init               = true
   cloud_init_storage_pool  = "local"
   ssh_username             = "vagrant"
-  ssh_password             = "${var.SSHPW}"
+  ssh_password             = "${local.user-ssh-password}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for a frontend webserver"
   vm_name                  = "${var.frontend-VMNAME}"
@@ -183,7 +183,7 @@ source "proxmox-iso" "load-balancer" {
   cloud_init               = true
   cloud_init_storage_pool  = "local"
   ssh_username             = "vagrant"
-  ssh_password             = "${var.SSHPW}"
+  ssh_password             = "${local.user-ssh-password}"
   ssh_timeout              = "28m"
   template_description     = "A Packer template for a load-balancer"
   vm_name                  = "${var.loadbalancer-VMNAME}"
@@ -308,18 +308,21 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    environment_vars = ["CLIENTID=${var.CLIENTID}",
-                       "PROJECTID=${var.PROJECTID}",
+    environment_vars = ["CLIENTID=${local.client_id}",
+                       "PROJECTID=${local.project_id}",
                        "AUTHURI=${var.AUTHURI}",
                        "TOKENURI=${var.TOKENURI}",
                        "CERTIFICATE=${var.CERTIFICATE}",
-                       "SECRET=${var.SECRET}",
+                       "SECRET=${local.secret}",
                        "ORIGIN1=${var.ORIGIN1}",
                        "ORIGIN2=${var.ORIGIN2}",
-                       "DBUSER=${var.DBUSER}",
-                       "DBPASS=${var.DBPASS}",
-                       "DATABASE=${var.DATABASE}",
-                       "FQDN=${var.FQDN}"]
+                       "DBUSER=${local.db_user}",
+                       "DBPASS=${local.db_pass}",
+                       "DATABASE=${local.db_name}",
+                       "FQDN=${local.db_FQDN}",
+                       "AWSACCESS=${local.aws_access}",
+                       "AWSBUCKET${local.aws_bucket}",
+                       "AWSSECRET${local.aws_secret}"]
     scripts         = ["../scripts/proxmox/frontend/post_install_prxmx_frontend-firewall-open-ports.sh",
                       "../scripts/proxmox/frontend/post_install_prxmx_frontend-webserver.sh"]
     only            = ["proxmox-iso.frontend-webserver"]
@@ -327,9 +330,9 @@ build {
 
   provisioner "shell" {
     execute_command = "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    environment_vars = ["DBUSER=${var.DBUSER}",
+    environment_vars = ["DBUSER=${local.db_user}",
                        "IPRANGE=${var.CONNECTIONFROMIPRANGE}", 
-                       "DBPASS=${var.DBPASS}"]
+                       "DBPASS=${local.db_pass}"]
     scripts         = ["../scripts/proxmox/backend/post_install_prxmx_backend-firewall-open-ports.sh",
                       "../scripts/proxmox/backend/post_install_prxmx_backend-database.sh"]
     only            = ["proxmox-iso.backend-database"]

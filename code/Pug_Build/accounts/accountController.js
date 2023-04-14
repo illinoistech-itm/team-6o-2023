@@ -7,7 +7,7 @@ const pool = mariadb.createPool({
     database: process.env.DATABASE_NAME,
 })
 
-const postTableOperations = {
+const accountTableOperations = {
 
     findByID: async (uid) => await pool.query("SELECT * FROM accounts WHERE uid = ?", [uid]),
     /*
@@ -30,4 +30,4 @@ const postTableOperations = {
     */
 }
 
-module.exports = postTableOperations;
+module.exports = accountTableOperations;
