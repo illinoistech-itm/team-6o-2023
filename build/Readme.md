@@ -84,3 +84,99 @@ Backend scripts located in build/example-code/proxmox-cloud-production-templates
 - Create and autoinject database
 
 ![Backend VM](media/backend.png "Backend")
+
+
+## Hashicorp Vault Tutorial
+
+**NOTE:** You must complete Grace's tutorial before starting this tutorial. On top of that, go through Professor Hajek's Vault tutorial. Otherwise, this tutorial will make zero sense. 
+
+1. First, SSH into our project build server using your account and public Id. 
+- Your file path will look different depending on where you store your public ID.
+- Use the same format as me, but replace my credentials with your credentails.
+![*VaultStep1*](./media/VaultTutorialStep1.jpg "VaultStep1")
+
+If your login is successful, the following output will appear:
+
+![*VaultStep1.2*](./media/VaultTutorialStep1.2.jpg "VaultStep1.2")
+
+2. Type: `cd team-6o-2023/`. Press Enter.
+
+![*VaultStep2*](./media/VaultTutorialStep2.jpg "VaultStep2")
+
+3. Type: `cd build/`. Press Enter.
+
+![*VaultStep3*](./media/VaultTutorialStep3.jpg "VaultStep3")
+
+4. Type: `cd example-code/`. Press Enter.
+
+![*VaultStep4*](./media/VaultTutorialStep4.jpg "VaultStep4")
+
+5. Type: `cd proxmox-cloud-production-templates/`. Press Enter.
+
+![*VaultStep5*](./media/VaultTutorialStep5.jpg "VaultStep5")
+
+6. Type: `cd packer/`. Press Enter.
+
+![*VaultStep6*](./media/VaultTutorialStep6.jpg "VaultStep6")
+
+7. Type: `cd proxmox-jammy-ubuntu-front-back-template/`. Press Enter.
+
+![*VaultStep7*](./media/VaultTutorialStep7.jpg "VaultStep7")
+
+8. Type: `ls`. Press Enter. To check the contents of the selected directory.
+
+- The `ls` command will show all contents of the current selected directory (folder).
+
+**NOTE** : The contents of the directory should match the screenshot below.
+
+![*VaultStep8*](./media/VaultTutorialStep8.jpg "VaultStep8")
+
+9. Connect to our vault server with the following command: `ssh -i id_ed25519_packer_terraform_key vagrant@192.168.172.80`. Press Enter.
+
+The follow output should display if you the login is succesful:
+
+![*VaultStep9*](./media/VaultTutorialStep9.jpg "VaultStep9")
+
+10. Type: `vault login`. Press enter.
+
+![*VaultStep10*]( ./media/VaultTutorialStep10.jpg "VaultStep10")
+
+Insert the Non-root Vault Token you were given. Press Enter. 
+
+The Following Output should display. Showing the amount of time your token will still be valid, the token you used, and the policies and permissions you are granted. For security reasons, I crossed out the token information. 
+
+![*VaultStep10.2*](./media/VaultTutorialStep10.2.jpg "VaultStep10.2")
+
+11. Now that you are logged in, type: `ls`. Press enter. You will now see the contents of our vault server. 
+
+![*VaultStep11*](./media/VaultTutorialStep11.jpg "VaultStep11")
+
+
+### Adjusting the Vault policy
+
+12. Find team6o.hcl. This is our team's policy file. To view and update the policy file, type `nano team6o.hcl`. Press enter. If you entered the command correctly, this is what you should see:
+
+![*VaultStep12*](./media/VaultTutorialStep12.jpg "VaultStep12")
+
+Not that we need to, but if you add anything to the project policy, ensure that you save your changes. To do this, press `ctrl + O`. To exit the file, press `ctrl + X`.
+
+### Inserting/Viewing Vault Secrets
+13. To view secrets, type `vault kv get -mount=secret name-of-secret` Press enter. 
+
+To view the current secrets of our vault, type the following commands. 
+
+First, type `vault kv get -mount=secret team6o-db` for database secrets. 
+![*VaultStep13*](./media/VaultTutorialStep13.jpg "VaultStep13")
+
+
+Second, type `vault kv get -mount=secret team6o-ssh` to get our ssh secret.
+![*VaultStep13.2*](./media/VaultTutorialStep13.2.jpg "VaultStep13.2")
+
+If you add any other secrets. Make sure insert how to view them within this tutorial.
+
+14. To insert a secret, use the following command. Type: `vault kv put -mount=secret name-of-secret desired-variables-for-secret`. 
+
+15. Now that you have added secrets to vault, exit our vault server. 
+
+![*VaultStep15*](./media/VaultTutorialStep15.jpg "VaultStep15")
+
