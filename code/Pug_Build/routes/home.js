@@ -84,7 +84,7 @@ router.post('/feed/',
           await postController.create({caption: req.body.caption, uid: req.session.userID})
         }
         else{
-          const file = req.files.name;
+          const file = req.files.image;
           const bucketParams = {
             Bucket: process.env.AWS_BUCKET_NAME,
             Key: req.session.userID + Date.parse(new Date()).toString(),
