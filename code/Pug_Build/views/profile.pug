@@ -38,6 +38,8 @@ block content
                 each value in posts
                     div(class="profile-post")
                         h5 #{value.caption}
+                        if value.image != null
+                            img(src=value.signedURL)
                         p(class="date-time") #{value.created}
                         a(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'
                         a(href=`/profile/posts/${value.pid}/delete`, class="btn btn-danger")= 'Delete Post'
