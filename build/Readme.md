@@ -172,6 +172,10 @@ First, type `vault kv get -mount=secret team6o-db` for database secrets.
 Second, type `vault kv get -mount=secret team6o-ssh` to get our ssh secret.
 ![*VaultStep13.2*](./media/VaultTutorialStep13.2.jpg "VaultStep13.2")
 
+Third, type `vault kv get -mount=secret team6o-cred` to get project credentials.
+
+![*VaultStep13.3*](./media/VaultTutorialStep13.3.jpg "VaultStep13.3")
+
 If you add any other secrets. Make sure insert how to view them within this tutorial.
 
 14. To insert a secret, use the following command. Type: `vault kv put -mount=secret name-of-secret desired-variables-for-secret`. 
