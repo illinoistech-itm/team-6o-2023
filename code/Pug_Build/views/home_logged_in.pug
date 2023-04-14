@@ -45,13 +45,13 @@ block content
                                     img(src=value.signedURL)
                                 p(class="post-by") Posted by: #{value.first_name} #{value.last_name}
                                 p(class="date-time") #{value.created}
-                                div
+                                div(class="comments")
                                     if value.comments.length > 0
                                         each comment in value.comments
-                                            p Posted by: #{comment.first_name} #{comment.last_name}
-                                            p #{comment.date}
-                                            p #{comment.comment}
+                                            p(class="comment-line") #{comment.comment}
+                                            p(class="comment-by") Posted by: #{comment.first_name} #{comment.last_name}
+                                            p(class="com-date-time") #{comment.date}
                                 div
                                     form(method='POST', name='commentForm', action=`/home/feed/${value.pid}`)
-                                        input(type="text", name = "commentText", id = "commentText")
+                                        input(type="text", name = "commentText", id = "commentText" placeholder="Reply to")
                                         input(type="submit" value="Post Comment")
