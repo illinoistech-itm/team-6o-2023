@@ -7,6 +7,21 @@ h1{
     font-style: italic;
 }
 
+.comments{
+    border-bottom: 1px solid #54525295;
+}
+
+.comment-line{
+    padding-top: 1em;
+    border-top: 1px solid #54525295;
+}
+
+.com-date-time{
+    font-size: 0.5em;
+    font-style: italic;
+    color: #54525295;
+}
+
 input {
     width: 100%;
     margin: 0 0 1em 0;
@@ -31,6 +46,11 @@ p{
 }
 
 .post-by{
+    color: #54525295; 
+}
+
+.comment-by{
+    font-size: 0.5em;
     color: #54525295; 
 }
 
