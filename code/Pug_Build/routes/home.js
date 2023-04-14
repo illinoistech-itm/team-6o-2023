@@ -34,6 +34,7 @@ router.post('/', async function(req, res, next) {
     session = req.session;
     session.userID = await login.signup(responsePayload);
     session.userEmail = responsePayload.email;
+    session.firstName = responsePayload.given_name
     session.token = responsePayload.jti;
     //console.log(req.session);
     res.redirect('/home/feed/');
@@ -72,7 +73,7 @@ router.get('/feed/', async function(req, res, next){
       editedPosts[i] = editedPost
     }
     //console.log(editedPosts)
-    res.render('home_logged_in',{title: 'Posts', posts: editedPosts})
+    res.render('home_logged_in',{title: 'Posts', posts: editedPosts, userFirstName: req.session.firstName})
   }
 
   else{

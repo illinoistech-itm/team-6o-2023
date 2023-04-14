@@ -10,7 +10,7 @@ router.get('/', async function(req, res, next) {
     if(await login.checkLogin(req.session)){
         const allUsersPosts = await postController.findByUID(req.session.userID)
         const userAccount = await accountsController.findByID(req.session.userID)
-        res.render('profile', { title: 'Posts', posts: allUsersPosts, account: userAccount[0] })
+        res.render('profile', { title: 'Posts', posts: allUsersPosts, account: userAccount[0], userFirstName: req.session.firstName })
     }
     
     else{
@@ -23,7 +23,7 @@ router.get('/posts/:id/edit', async function(req, res, next) {
     if(await login.checkLogin(req.session)){
         const post = await postController.findByID(req.params.id);
         let foundPost = post[0]
-        res.render('post_edit', { title: 'Edit Post', post: foundPost });
+        res.render('post_edit', { title: 'Edit Post', post: foundPost, userFirstName: req.session.firstName });
     }
     
     else{
@@ -63,7 +63,7 @@ router.get('/posts/:id/delete', async function(req, res, next) {
     if(await login.checkLogin(req.session)){
         const post = await postController.findByID(req.params.id);
         let foundPost = post[0]
-        res.render('post_delete', { title: 'Delete post', post: foundPost});
+        res.render('post_delete', { title: 'Delete post', post: foundPost, userFirstName: req.session.firstName});
     }
     
     else{
