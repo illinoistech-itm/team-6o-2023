@@ -49,7 +49,7 @@ INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('annyeonghase
 INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('guten tag', '49', 'Fri, 14 Apr 2023 00:34:12 GMT');
 INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('hallo', '50', 'Fri, 14 Apr 2023 00:34:12 GMT');
 INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('ni hao', '45', 'Fri, 14 Apr 2023 00:34:12 GMT');
-INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('buenos dias', '46', 'Fri, 14 Apr 2023 00:34:12 GMT');s
+INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('buenos dias', '46', 'Fri, 14 Apr 2023 00:34:12 GMT');
 INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('ola', '47', 'Fri, 14 Apr 2023 00:34:12 GMT');
 INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('hej', '48', 'Fri, 14 Apr 2023 00:34:12 GMT');
 INSERT INTO `team6o`.`posts` (`caption`, `uid`, `created`) VALUES ('dobre rano', '49', 'Fri, 14 Apr 2023 00:34:12 GMT');
