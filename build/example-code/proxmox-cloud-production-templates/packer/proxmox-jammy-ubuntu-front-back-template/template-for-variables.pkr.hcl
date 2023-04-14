@@ -74,11 +74,6 @@ variable "loadbalancer-VMNAME" {
 # default password is vagrant, and password auth will be remove 
 # and replaced with Public Key Authentication at run time --
 # This is only for build time
-variable "SSHPW" {
-  type      = string
-  default   = ""
-  sensitive = true
-}
 
 variable "ISO-CHECKSUM" {
   type    = string
@@ -90,52 +85,11 @@ variable "ISO-URL" {
   default = "https://mirrors.edge.kernel.org/ubuntu-releases/22.04.2/ubuntu-22.04.2-live-server-amd64.iso"
 }
 
-# This will be the non-root user account name
-variable "DBUSER" {
-  type      = string
-  sensitive = true
-  default   = "REPLACE"
-}
-
-# This will be the Database user (non-root) password setup
-variable "DBPASS" {
-  type      = string
-  sensitive = true
-  default   = "REPLACE"
-}
-
 # This variable is the IP address range to allow your connections
 variable "CONNECTIONFROMIPRANGE" {
   type      = string
   sensitive = true
   default   = "REPLACE"
-}
-
-# This will be the fully qualified domain name yourinitials.service.consul
-variable "FQDN" {
-  type      = string
-  sensitive = true
-  default   = "REPLACE"
-}
-
-# This will be the Database name you default to (like posts or comments or customers)
-variable "DATABASE" {
-  type      = string
-  sensitive = true
-  default   = "REPLACE"
-}
-
-# This is the contents for credentials.txt which will be changed credentials.json
-variable "CLIENTID" {
-  type = string
-  sensitive = true
-  default = ""
-}
-
-variable "PROJECTID" {
-  type = string
-  sensitive = true
-  default = ""
 }
 
 variable "AUTHURI" {
@@ -156,12 +110,6 @@ variable "CERTIFICATE" {
   default = ""
 }
 
-variable "SECRET" {
-  type = string
-  sensitive = true
-  default = ""
-}
-
 variable "ORIGIN1" {
   type = string
   sensitive = true
@@ -172,4 +120,70 @@ variable "ORIGIN2" {
   type = string
   sensitive = true
   default = ""
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  user-ssh-password = vault("/secret/data/team6o-ssh","SSHPASS")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  db_user = vault("/secret/data/team6o-db", "DBUSER")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  db_pass = vault("/secret/data/team6o-db", "DBPASS")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  db_name = vault("/secret/data/team6o-db", "DATABASENAME")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  db_FQDN = vault("/secret/data/team6o-db", "FQDN")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  aws_access = vault("/secret/data/team6o-cred", "AWSACCESS")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  aws_bucket = vault("/secret/data/team6o-cred", "AWSBUCKET")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  aws_secret = vault("/secret/data/team6o-cred", "AWSSECRET")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  client_id = vault("/secret/data/team6o-cred", "CLIENTID")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  project_id = vault("/secret/data/team6o-cred", "PROJECTID")
+}
+
+# Syntax
+# https://developer.hashicorp.com/packer/docs/templates/hcl_templates/functions/contextual/vault
+locals {
+  secret = vault("/secret/data/team6o-cred", "SECRET")
 }
