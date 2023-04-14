@@ -73,6 +73,7 @@ router.get('/feed/', async function(req, res, next){
       editedPosts[i] = editedPost
     }
     //console.log(editedPosts)
+    editedPosts.reverse();
     res.render('home_logged_in',{title: 'Posts', posts: editedPosts, userFirstName: req.session.firstName})
   }
 

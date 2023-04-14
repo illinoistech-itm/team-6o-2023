@@ -31,7 +31,7 @@ router.get('/', async function(req, res, next) {
               
               editedPosts[i] = editedPost
             }
-
+            editedPosts.reverse();
         res.render('profile', { title: 'Posts', posts: editedPosts, account: userAccount[0], userFirstName: req.session.firstName })
     }
     
