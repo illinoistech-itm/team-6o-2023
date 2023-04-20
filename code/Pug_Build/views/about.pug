@@ -4,6 +4,7 @@ block customcss
   link(rel='stylesheet' href='/stylesheets/sidebar.css')
 
 block currentPage
+    a.nav-link.text-white(href='/home/feed' aria-current='page') Home
     a.nav-link.active(href='/home/about' aria-current='page') About
 block content
     .home-area.scrollarea.bg-light.p-5.rounded
