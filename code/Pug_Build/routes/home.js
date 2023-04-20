@@ -82,6 +82,10 @@ router.get('/feed/', async function(req, res, next){
   }
 })
 
+router.get('/about/', function(req, res, next) {
+  res.render('about', { title: 'About'});
+});
+
 router.post('/feed/post',
   body('caption').trim().notEmpty().withMessage('The caption cannot be empty!'),
   body('caption').trim().isLength({max: 250}).withMessage('The caption cannot be empty!'),

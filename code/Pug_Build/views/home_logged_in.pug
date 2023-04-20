@@ -5,6 +5,7 @@ block customcss
 
 block currentPage
     a.nav-link.active(href='/home/feed' aria-current='page') Home
+    a.nav-link(href='/home/about' aria-current='page') About
 block content
     .home-area.scrollarea.bg-light.p-5.rounded
         h1 Home page
@@ -15,12 +16,12 @@ block content
                         h2 New Post:
                         fieldset
                             div 
-                                textarea(name="caption", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
+                                textarea(name="caption", class= "form-control", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
                             div
-                                input(type="file", id="image", name="image")
+                                input(type="file", class= "form-control", id="image", name="image")
                             div 
                                 p 
-                                    input(type="submit" value="Post Me")
+                                    input(type="submit", class= "form-control btn btn-danger", value="Post Me")
 
                 div
                     if posts.length>0 
@@ -53,5 +54,5 @@ block content
                                             p(class="com-date-time") #{comment.date}
                                 div
                                     form(method='POST', name='commentForm', action=`/home/feed/${value.pid}`)
-                                        input(type="text", name = "commentText", id = "commentText" placeholder="Reply to")
-                                        input(type="submit" value="Post Comment")
+                                        input(type="text", class= "form-control", name = "commentText", id = "commentText" placeholder="Reply to")
+                                        input(type="submit", class= "form-control btn btn-danger", value="Post Comment")

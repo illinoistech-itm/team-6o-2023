@@ -1,0 +1,12 @@
+extends layout
+
+block customcss 
+  link(rel='stylesheet' href='/stylesheets/sidebar.css')
+
+block currentPage
+    a.nav-link.active(href='/home/about' aria-current='page') About
+block content
+    .home-area.scrollarea.bg-light.p-5.rounded
+        h1 About page
+        body
+            h2 hello
