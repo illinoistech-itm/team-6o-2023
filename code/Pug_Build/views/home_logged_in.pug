@@ -5,15 +5,15 @@ block customcss
 
 block currentPage
     a.nav-link.active(href='/home/feed' aria-current='page') Home
-    a.nav-link(href='/home/about' aria-current='page') About
+    a.nav-link.text-white(href='/home/about' aria-current='page') About
 block content
-    .home-area.scrollarea.bg-light.p-5.rounded
-        h1 Home page
+    .home-area.bg-light.p-5.rounded.newPost
+        h1 Home
         body
             div(class="post-form")
                 div
                     form(method='POST', name='postForm', action='/home/feed/post', enctype="multipart/form-data")
-                        h2 New Post:
+                        h2(class="postHeader") New Post
                         fieldset
                             div 
                                 textarea(name="caption", class= "form-control", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
@@ -22,37 +22,23 @@ block content
                             div 
                                 p 
                                     input(type="submit", class= "form-control btn btn-danger", value="Post Me")
-
-                div
-                    if posts.length>0 
-                        //table(class="table table-hover table-light")
-                            thead 
-                                tr 
-                                    th(scope="col") Caption 
-                                    th(scope="col") Created 
-                                    th(scope="col") email 
-                                    th(scope="col") pid
-                            tbody 
-                                each value in posts 
-                                    tr 
-                                        td= value.caption 
-                                        td= value.created 
-                                        td= value.email
-                                        td= value.pid
-                        each value in posts
-                            div(class="post")
-                                h5 #{value.caption}
-                                if value.image != null
-                                    img(src=value.signedURL)
-                                p(class="post-by") Posted by: #{value.first_name} #{value.last_name}
-                                p(class="date-time") #{value.created}
-                                div(class="comments")
-                                    if value.comments.length > 0
-                                        each comment in value.comments
-                                            p(class="comment-line") #{comment.comment}
-                                            p(class="comment-by") Posted by: #{comment.first_name} #{comment.last_name}
-                                            p(class="com-date-time") #{comment.date}
-                                div
-                                    form(method='POST', name='commentForm', action=`/home/feed/${value.pid}`)
-                                        input(type="text", class= "form-control", name = "commentText", id = "commentText" placeholder="Reply to")
-                                        input(type="submit", class= "form-control btn btn-danger", value="Post Comment")
+            
+    div.posts.bg-light.scrollarea
+        if posts.length>0 
+            each value in posts
+                div(class="post")
+                    h5 #{value.caption}
+                    if value.image != null
+                        img(src=value.signedURL)
+                    p(class="post-by") Posted by: #{value.first_name} #{value.last_name}
+                    p(class="date-time") #{value.created}
+                    div(class="comments")
+                        if value.comments.length > 0
+                            each comment in value.comments
+                                p(class="comment-line") #{comment.comment}
+                                p(class="comment-by") Posted by: #{comment.first_name} #{comment.last_name}
+                                p(class="com-date-time") #{comment.date}
+                    div
+                        form(method='POST', name='commentForm', action=`/home/feed/${value.pid}`)
+                            input(type="text", class= "form-control", name = "commentText", id = "commentText" placeholder="Reply to")
+                            input(type="submit", class= "form-control btn btn-danger", value="Post Comment")

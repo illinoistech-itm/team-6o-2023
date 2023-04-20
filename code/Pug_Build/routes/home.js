@@ -83,7 +83,7 @@ router.get('/feed/', async function(req, res, next){
 })
 
 router.get('/about/', function(req, res, next) {
-  res.render('about', { title: 'About'});
+  res.render('about', { title: 'About', userFirstName: req.session.firstName});
 });
 
 router.post('/feed/post',
