@@ -18,10 +18,9 @@ block content
                             div 
                                 textarea(name="caption", class= "form-control", cols="40", rows="10", placeholder="What Do You Mean? Woahhh~~~")
                             div
-                                input(type="file", class= "form-control", id="image", name="image")
-                            div 
-                                p 
-                                    input(type="submit", class= "form-control btn btn-danger", value="Post Me")
+                                input(type="file", class= "form-control border", id="image", name="image")
+                            .text-center
+                                input(type="submit", class= "form-control btn btn-danger rounded-pill w-75", value="Post Me")
             
     div.posts.bg-light.scrollarea
         if posts.length>0 
@@ -41,4 +40,5 @@ block content
                     div
                         form(method='POST', name='commentForm', action=`/home/feed/${value.pid}`)
                             input(type="text", class= "form-control", name = "commentText", id = "commentText" placeholder="Reply to")
-                            input(type="submit", class= "form-control btn btn-danger", value="Post Comment")
+                            .text-center
+                                input(type="submit", class= "form-control btn btn-danger w-50 rounded-pill commentBtn", value="Post Comment")

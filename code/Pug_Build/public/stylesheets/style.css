@@ -110,3 +110,11 @@ h3{
     overflow-x: auto;
     overflow-y: hidden;
 }
+
+@media screen and (max-width: 800px){
+    .commentBtn{
+        width: fit-content !important;
+    }
+}
+    
+
