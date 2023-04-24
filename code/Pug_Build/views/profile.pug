@@ -41,6 +41,6 @@ block content
                         if value.image != null
                             img(src=value.signedURL)
                         p(class="date-time") #{value.created}
-                        a(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'
-                        a(href=`/profile/posts/${value.pid}/delete`, class="btn btn-danger")= 'Delete Post'
+                        a.mx-2.rounded-pill(href=`/profile/posts/${value.pid}/edit`, class="btn btn-primary")= 'Edit Post'
+                        a.rounded-pill(href=`/profile/posts/${value.pid}/delete`, class="btn btn-danger")= 'Delete Post'
                                 
